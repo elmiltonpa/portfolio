@@ -1,0 +1,58 @@
+---
+import SkillBadge from "../ui/SkillBadge.astro";
+
+const skills = [
+    { name: "Python", icon: "" },
+    { name: "Node.js", icon: "" },
+    { name: "PostgreSQL", icon: "" },
+    { name: "Docker", icon: "" },
+    { name: "Linux", icon: "" },
+    { name: "Git", icon: "" },
+    { name: "AWS", icon: "" },
+    { name: "Redis", icon: "" },
+];
+---
+
+<section id="about" class="bg-card">
+    <div class="section-container">
+        <h2 class="section-title text-foreground">Sobre Mí</h2>
+
+        <div class="grid md:grid-cols-2 gap-12">
+            <div class="space-y-6">
+                <p class="text-muted-foreground leading-relaxed">
+                    Soy un desarrollador backend con experiencia en diseño y
+                    desarrollo de sistemas escalables. Me especializo en crear
+                    arquitecturas limpias, APIs RESTful eficientes y soluciones
+                    que priorizan el rendimiento.
+                </p>
+
+                <p class="text-muted-foreground leading-relaxed">
+                    Mi enfoque se centra en escribir código mantenible,
+                    implementar buenas prácticas de desarrollo y optimizar
+                    procesos para equipos de alto rendimiento. Trabajo
+                    principalmente con tecnologías modernas de backend y
+                    sistemas distribuidos.
+                </p>
+
+                <p class="text-muted-foreground leading-relaxed">
+                    Cuando no estoy codificando, probablemente estoy explorando
+                    nuevas tecnologías, contribuyendo a proyectos open source o
+                    jugando videojuegos.
+                </p>
+            </div>
+
+            <div>
+                <h3 class="font-mono text-primary text-sm mb-6">
+                    // Tecnologías que uso
+                </h3>
+                <div class="flex flex-wrap gap-3">
+                    {
+                        skills.map((skill) => (
+                            <SkillBadge name={skill.name} icon={skill.icon} />
+                        ))
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

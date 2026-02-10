@@ -1,0 +1,77 @@
+---
+import Button from "../ui/Button.astro";
+---
+
+<section
+    class="relative min-h-screen flex items-center justify-center overflow-hidden"
+>
+    <div
+        class="absolute inset-0 bg-linear-to-b from-background via-background to-card"
+    >
+    </div>
+    <div
+        class="absolute inset-0 opacity-[0.03]"
+        style={{
+            backgroundImage: `linear-gradient(hsl(var(--primary)) 1px, transparent 1px),
+                               linear-gradient(90deg, hsl(var(--primary)) 1px, transparent 1px)`,
+            backgroundSize: "60px 60px",
+        }}
+    >
+    </div>
+    <div
+        class="absolute top-1/4 left-1/2 -translate-x-1/2 w-150 h-150 bg-primary/5 rounded-full blur-[100px]"
+    >
+    </div>
+
+    <div class="relative z-10 section-container text-center md:text-left">
+        <div class="max-w-3xl">
+            <p
+                class="font-mono text-primary text-sm md:text-base mb-4 opacity-0 animate-fade-up stagger-1"
+            >
+                Hola, mi nombre es
+            </p>
+            <h1
+                class="text-4xl sm:text-5xl md:text-7xl font-bold mb-4 opacity-0 animate-fade-up stagger-2"
+            >
+                <span class="text-foreground">Milton Ibarra</span>
+            </h1>
+            <h2
+                class="text-3xl sm:text-4xl md:text-5xl font-bold text-muted-foreground mb-6 opacity-0 animate-fade-up stagger-3"
+            >
+                Backend developer
+            </h2>
+            <p
+                class="text-muted-foreground text-lg md:text-xl max-w-xl mb-10 leading-relaxed opacity-0 animate-fade-up stagger-4"
+            >
+                Desarrollo sistemas robustos y escalables. Especializado en
+                arquitectura de software, APIs y soluciones backend de alto
+                rendimiento.
+            </p>
+            <div
+                class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start opacity-0 animate-fade-up stagger-5"
+            >
+                <Button
+                    href="https://github.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    variant="outline"
+                    size="lg"
+                    icon="lucide:github"
+                    class="group border-primary text-primary hover:bg-primary hover:text-primary-foreground glow-hover font-mono"
+                >
+                    GitHub
+                </Button>
+
+                <Button
+                    href="#projects"
+                    variant="default"
+                    size="lg"
+                    icon="lucide:folder-open"
+                    class="bg-primary text-primary-foreground hover:bg-primary/90 glow-primary font-mono"
+                >
+                    Ver Proyectos
+                </Button>
+            </div>
+        </div>
+    </div>
+</section>
