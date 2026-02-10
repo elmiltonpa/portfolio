@@ -1,0 +1,133 @@
+---
+const navItems = [
+    { name: "Sobre mí", href: "#about" },
+    { name: "Proyectos", href: "#projects" },
+    { name: "Juegos", href: "#games" },
+    { name: "Contacto", href: "#contact" },
+];
+---
+
+<header
+    id="main-header"
+    class="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
+>
+    <div class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
+        <a
+            href="/"
+            class="font-mono text-lg font-bold text-primary hover:opacity-80 transition-opacity"
+        >
+            &lt;dev /&gt;
+        </a>
+
+        <nav class="hidden md:block" aria-label="Main Navigation">
+            <ul class="flex items-center gap-8">
+                {
+                    navItems.map(({ href, name }) => (
+                        <li>
+                            <a
+                                href={href}
+                                class="font-mono text-sm text-muted-foreground hover:text-primary transition-colors"
+                            >
+                                {name}
+                            </a>
+                        </li>
+                    ))
+                }
+            </ul>
+        </nav>
+
+        <button
+            id="menu-toggle"
+            class="md:hidden text-foreground p-2"
+            aria-expanded="false"
+            aria-controls="mobile-menu"
+            aria-label="Abrir menú"
+        >
+            <svg
+                id="icon-menu"
+                class="h-6 w-6"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                ><line x1="4" x2="20" y1="12" y2="12"></line><line
+                    x1="4"
+                    x2="20"
+                    y1="6"
+                    y2="6"></line><line x1="4" x2="20" y1="18" y2="18"
+                ></line></svg
+            >
+            <svg
+                id="icon-close"
+                class="hidden h-6 w-6"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                ><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg
+            >
+        </button>
+    </div>
+
+    <nav
+        id="mobile-menu"
+        class="hidden md:hidden bg-background/95 backdrop-blur-lg border-b border-border absolute w-full left-0"
+    >
+        <ul class="flex flex-col items-center py-8 gap-6">
+            {
+                navItems.map(({ href, name }) => (
+                    <li>
+                        <a
+                            href={href}
+                            class="mobile-link font-mono text-lg text-muted-foreground hover:text-primary transition-colors"
+                        >
+                            {name}
+                        </a>
+                    </li>
+                ))
+            }
+        </ul>
+    </nav>
+</header>
+
+<script>
+    document.addEventListener("astro:page-load", () => {
+        const header = document.querySelector("#main-header");
+        const menuToggle = document.querySelector("#menu-toggle");
+        const mobileMenu = document.querySelector("#mobile-menu");
+        const icons = {
+            menu: document.querySelector("#icon-menu"),
+            close: document.querySelector("#icon-close"),
+        };
+        const mobileLinks = document.querySelectorAll(".mobile-link");
+
+        const handleScroll = () => {
+            const isScrolled = window.scrollY > 50;
+            header?.classList.toggle("bg-background/80", isScrolled);
+            header?.classList.toggle("backdrop-blur-md", isScrolled);
+            header?.classList.toggle("border-b", isScrolled);
+            header?.classList.toggle("border-border", isScrolled);
+            header?.classList.toggle("bg-transparent", !isScrolled);
+        };
+
+        const toggleMenu = () => {
+            const isHidden = mobileMenu?.classList.toggle("hidden");
+
+            icons.menu?.classList.toggle("hidden", !isHidden);
+            icons.close?.classList.toggle("hidden", isHidden);
+            menuToggle?.setAttribute("aria-expanded", String(!isHidden));
+        };
+
+        window.addEventListener("scroll", handleScroll, { passive: true });
+        menuToggle?.addEventListener("click", toggleMenu);
+        mobileLinks.forEach((link) =>
+            link.addEventListener("click", toggleMenu),
+        );
+    });
+</script>
