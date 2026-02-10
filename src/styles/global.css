@@ -1,1 +1,189 @@
 @import "tailwindcss";
+
+@theme {
+    --color-background: #09090b;
+    --color-foreground: #f2f2f2;
+    --color-card: #111114;
+    --color-card-foreground: #f2f2f2;
+    --color-popover: #111114;
+    --color-primary: #805ad5;
+    --color-primary-foreground: #ffffff;
+    --color-secondary: #1c1c21;
+    --color-secondary-foreground: #a1a1aa;
+    --color-muted: #222228;
+    --color-muted-foreground: #a1a1aa;
+    --color-accent: #805ad5;
+    --color-destructive: #ef4444;
+    --color-border: #2a2a31;
+    --color-input: #2a2a31;
+    --color-ring: #805ad5;
+}
+
+@layer base {
+    * {
+        @apply border-border;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        @apply bg-background text-foreground font-sans antialiased;
+    }
+}
+
+@layer components {
+    .text-gradient {
+        @apply bg-linear-to-r from-primary to-accent bg-clip-text text-transparent;
+    }
+
+    .glow-primary {
+        box-shadow:
+            0 0 20px hsl(var(--glow-primary) / 0.3),
+            0 0 40px hsl(var(--glow-primary) / 0.1);
+    }
+
+    .glow-hover {
+        @apply transition-shadow duration-300;
+    }
+
+    .glow-hover:hover {
+        box-shadow:
+            0 0 30px hsl(var(--glow-primary) / 0.2),
+            0 0 60px hsl(var(--glow-primary) / 0.1);
+    }
+
+    .card-glow {
+        @apply relative overflow-hidden;
+    }
+
+    .card-glow::before {
+        content: "";
+        @apply absolute inset-0 opacity-0 transition-opacity duration-500;
+        background: radial-gradient(
+            600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+            hsl(var(--primary) / 0.1),
+            transparent 40%
+        );
+    }
+
+    .card-glow:hover::before {
+        @apply opacity-100;
+    }
+
+    .section-container {
+        @apply max-w-5xl mx-auto px-6 py-20 md:py-32;
+    }
+
+    .section-title {
+        @apply text-2xl md:text-3xl font-bold font-mono mb-8 flex items-center gap-4;
+    }
+
+    .section-title::before {
+        content: "";
+        @apply w-8 h-px bg-primary;
+    }
+
+    .link-underline {
+        @apply relative inline-block;
+    }
+
+    .link-underline::after {
+        content: "";
+        @apply absolute left-0 bottom-0 w-full h-px bg-primary scale-x-0 origin-right transition-transform duration-300;
+    }
+
+    .link-underline:hover::after {
+        @apply scale-x-100 origin-left;
+    }
+}
+
+@layer utilities {
+    .animate-fade-up {
+        animation: fade-up 0.6s ease-out forwards;
+    }
+
+    .animate-fade-in {
+        animation: fade-in 0.4s ease-out forwards;
+    }
+
+    @keyframes fade-up {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes fade-in {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    .stagger-1 {
+        animation-delay: 0.1s;
+    }
+    .stagger-2 {
+        animation-delay: 0.2s;
+    }
+    .stagger-3 {
+        animation-delay: 0.3s;
+    }
+    .stagger-4 {
+        animation-delay: 0.4s;
+    }
+    .stagger-5 {
+        animation-delay: 0.5s;
+    }
+}
+
+#root {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+}
+
+.logo {
+    height: 6em;
+    padding: 1.5em;
+    will-change: filter;
+    transition: filter 300ms;
+}
+.logo:hover {
+    filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+    filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    a:nth-of-type(2) .logo {
+        animation: logo-spin infinite 20s linear;
+    }
+}
+
+.card {
+    padding: 2em;
+}
+
+.read-the-docs {
+    color: #888;
+}
