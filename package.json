@@ -9,8 +9,13 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@iconify-json/lucide": "^1.2.89",
     "@tailwindcss/vite": "^4.1.18",
     "astro": "^5.17.1",
+    "astro-icon": "^1.1.5",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^3.4.0",
     "tailwindcss": "^4.1.18"
   }
 }
