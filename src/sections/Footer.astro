@@ -1,1 +1,99 @@
-<h1>Footer</h1>
+---
+import { Icon } from "astro-icon/components";
+
+const currentYear = new Date().getFullYear();
+
+const navItems = [
+    { name: "Inicio", href: "#" },
+    { name: "Sobre mi", href: "#about" },
+    { name: "Habilidades", href: "#skills" },
+    { name: "Proyectos", href: "#projects" },
+    { name: "Juegos", href: "#games" },
+    { name: "Contacto", href: "#contact" },
+];
+
+const socials = [
+    { icon: "lucide:github", href: "#", label: "GitHub" },
+    { icon: "lucide:linkedin", href: "#", label: "LinkedIn" },
+];
+---
+
+<footer class="border-t border-border bg-background">
+    <div class="max-w-5xl mx-auto px-6 py-12">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12 items-start">
+            <div class="space-y-4">
+                <a
+                    href="/"
+                    class="font-mono text-xl font-bold text-primary hover:opacity-80 transition-opacity"
+                >
+                    &lt;dev /&gt;
+                </a>
+                <p
+                    class="text-muted-foreground text-sm leading-relaxed max-w-xs"
+                >
+                    Desarrollador Backend enfocado en crear sistemas eficientes
+                    y experiencias digitales robustas.
+                </p>
+            </div>
+            <div>
+                <h3
+                    class="font-mono text-sm font-bold text-foreground mb-6 uppercase tracking-wider"
+                >
+                    Navegación
+                </h3>
+                <ul class="space-y-3">
+                    {
+                        navItems.map((item) => (
+                            <li>
+                                <a
+                                    href={item.href}
+                                    class="text-muted-foreground hover:text-primary transition-colors text-sm font-mono link-underline"
+                                >
+                                    {item.name}
+                                </a>
+                            </li>
+                        ))
+                    }
+                </ul>
+            </div>
+
+            <div>
+                <h3
+                    class="font-mono text-sm font-bold text-foreground mb-6 uppercase tracking-wider"
+                >
+                    Social
+                </h3>
+                <div class="flex gap-4">
+                    {
+                        socials.map((social) => (
+                            <a
+                                href={social.href}
+                                class="p-3 rounded-lg bg-secondary border border-border text-muted-foreground hover:text-primary hover:border-primary/50 transition-all duration-300"
+                                aria-label={social.label}
+                            >
+                                <Icon name={social.icon} class="size-5" />
+                            </a>
+                        ))
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div
+            class="mt-16 pt-8 border-t border-border/50 flex flex-col md:flex-row justify-between items-center gap-6"
+        >
+            <p class="text-muted-foreground text-xs font-mono">
+                &copy; {currentYear} Milton Ibarra. Todos los derechos reservados.
+            </p>
+
+            <div
+                class="flex items-center gap-2 text-muted-foreground text-xs font-mono"
+            >
+                <span>Hecho con</span>
+                <Icon name="lucide:heart" class="size-3 text-primary" />
+                <span>usando</span>
+                <span class="text-foreground">Astro</span>
+            </div>
+        </div>
+    </div>
+</footer>
