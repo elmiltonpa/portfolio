@@ -1,0 +1,67 @@
+---
+import { Icon } from "astro-icon/components";
+import SkillBadge from "../ui/SkillBadge.astro";
+
+const skillCategories = [
+    {
+        title: "Backend & Core",
+        icon: "lucide:cpu",
+        skills: [
+            { name: "Python", icon: "lucide:code-2" },
+            { name: "Node.js", icon: "lucide:hexagon" },
+            { name: "Rust", icon: "lucide:code-2" },
+        ],
+    },
+    {
+        title: "Databases & Storage",
+        icon: "lucide:database",
+        skills: [
+            { name: "PostgreSQL", icon: "lucide:database" },
+            { name: "Redis", icon: "lucide:zap" },
+            { name: "MongoDB", icon: "lucide:leaf" },
+        ],
+    },
+    {
+        title: "DevOps & Infrastructure",
+        icon: "lucide:cloud",
+        skills: [
+            { name: "Docker", icon: "lucide:box" },
+            { name: "AWS", icon: "lucide:cloud" },
+            { name: "Linux", icon: "lucide:terminal" },
+            { name: "Git", icon: "lucide:git-branch" },
+        ],
+    },
+];
+---
+
+<section id="skills" class="bg-transparent min-h-screen">
+    <div class="section-container">
+        <h2 class="section-title text-foreground">Habilidades Técnicas</h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {
+                skillCategories.map((category) => (
+                    <div class="space-y-6">
+                        <div class="flex items-center gap-3 group">
+                            <div class="p-2 rounded-lg bg-primary/10 text-primary border border-primary/20">
+                                <Icon name={category.icon} class="size-5" />
+                            </div>
+                            <h3 class="font-mono text-lg font-bold text-foreground">
+                                {category.title}
+                            </h3>
+                        </div>
+
+                        <div class="flex flex-col gap-3">
+                            {category.skills.map((skill) => (
+                                <SkillBadge
+                                    name={skill.name}
+                                    icon={skill.icon}
+                                />
+                            ))}
+                        </div>
+                    </div>
+                ))
+            }
+        </div>
+    </div>
+</section>
