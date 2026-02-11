@@ -2,7 +2,11 @@
 import ProjectCard from "./ProjectCard.astro";
 import { getCollection } from "astro:content";
 
-const projects = await getCollection("projects");
+const projects = (await getCollection("projects")).sort((a, b) => {
+    const orderA = a.data.order ?? Infinity;
+    const orderB = b.data.order ?? Infinity;
+    return orderA - orderB;
+});
 ---
 
 <section id="projects" class="bg-card min-h-screen">
