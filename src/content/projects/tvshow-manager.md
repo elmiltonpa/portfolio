@@ -6,4 +6,5 @@ tags: ["React", "Node.js", "Express", "MongoDB", "TypeScript"]
 link: "https://tvshow-manager.vercel.app/home"
 github: "https://github.com/elmiltonpa/TVSHOW-MANAGER"
 featured: true
+order: 2
 ---

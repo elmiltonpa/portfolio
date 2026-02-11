@@ -5,4 +5,5 @@ image: "/algoritmo.webp"
 tags: ["Pascal", "Data Structures", "Algorithms", "Systems Programming"]
 github: "https://github.com/elmiltonpa/PROYECTO-ALGORITMO"
 featured: false
+order: 5
 ---

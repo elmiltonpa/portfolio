@@ -9,6 +9,7 @@ const projectsCollection = defineCollection({
     link: z.string().optional(),
     github: z.string().optional(),
     featured: z.boolean().optional(),
+    order: z.number().optional(),
   }),
 });
 
