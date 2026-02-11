@@ -3,13 +3,16 @@ import Button from "../ui/Button.astro";
 ---
 
 <section
-    class="relative min-h-screen flex items-center justify-center overflow-hidden"
+    class="relative min-h-screen flex items-center justify-center overflow-hidden bg-transparent"
 >
-    <div
-        class="absolute inset-0 bg-linear-to-b from-background via-background to-card"
+    <!-- Degradado de fondo con transparencia para dejar ver el patrón global -->
+    <!-- <div
+        class="absolute inset-0 bg-linear-to-b from-background/50 via-background/80 to-card/50"
     >
-    </div>
-    <div
+    </div> -->
+
+    <!-- Cuadrícula decorativa propia del Hero -->
+    <!-- <div
         class="absolute inset-0 opacity-[0.03]"
         style={{
             backgroundImage: `linear-gradient(hsl(var(--primary)) 1px, transparent 1px),
@@ -17,7 +20,9 @@ import Button from "../ui/Button.astro";
             backgroundSize: "60px 60px",
         }}
     >
-    </div>
+    </div> -->
+
+    <!-- Brillo central -->
     <div
         class="absolute top-1/4 left-1/2 -translate-x-1/2 w-150 h-150 bg-primary/5 rounded-full blur-[100px]"
     >

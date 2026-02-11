@@ -29,7 +29,16 @@
     }
 
     body {
-        @apply bg-background text-foreground font-sans antialiased;
+        @apply bg-background text-foreground font-sans antialiased relative min-h-screen;
+    }
+
+    body::before {
+        content: "";
+        @apply fixed inset-0 z-[-1] pointer-events-none opacity-[0.05];
+        background-image: url("/hideout.svg");
+        background-repeat: repeat;
+        background-size: 50px;
+        filter: invert(1);
     }
 }
 
@@ -60,7 +69,7 @@
 
     .card-glow::before {
         content: "";
-        @apply absolute inset-0 opacity-0 transition-opacity duration-500;
+        @apply absolute inset-0 opacity-0 transition-opacity duration-500 pointer-events-none;
         background: radial-gradient(
             600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
             hsl(var(--primary) / 0.1),
