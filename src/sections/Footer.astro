@@ -4,11 +4,11 @@ import { Icon } from "astro-icon/components";
 const currentYear = new Date().getFullYear();
 
 const navItems = [
-    { name: "Inicio", href: "/" },
-    { name: "Sobre mi", href: "#about" },
-    { name: "Habilidades", href: "#skills" },
-    { name: "Proyectos", href: "#projects" },
-    { name: "Contacto", href: "#contact" },
+    { name: "Home", href: "/" },
+    { name: "About me", href: "#about" },
+    { name: "Skills", href: "#skills" },
+    { name: "Projects", href: "#projects" },
+    { name: "Contact", href: "#contact" },
 ];
 
 const socials = [
@@ -40,15 +40,15 @@ const socials = [
                 <p
                     class="text-muted-foreground text-sm leading-relaxed max-w-xs"
                 >
-                    Ingeniería backend con enfoque en escalabilidad, rendimiento
-                    y código limpio.
+                    Backend engineering with focus on scalability, performance
+                    and clean code.
                 </p>
             </div>
             <div>
                 <h3
                     class="font-mono text-sm font-bold text-foreground mb-6 uppercase tracking-wider"
                 >
-                    Navegación
+                    Navigation
                 </h3>
                 <ul class="space-y-3">
                     {
@@ -92,15 +92,15 @@ const socials = [
             class="mt-16 pt-8 border-t border-border/50 flex flex-col md:flex-row justify-between items-center gap-6"
         >
             <p class="text-muted-foreground text-xs font-mono">
-                &copy; {currentYear} Milton Ibarra. Todos los derechos reservados.
+                &copy; {currentYear} Milton Ibarra. All rights reserved.
             </p>
 
             <div
                 class="flex items-center gap-2 text-muted-foreground text-xs font-mono"
             >
-                <span>Hecho con</span>
+                <span>Made with</span>
                 <Icon name="lucide:heart" class="size-3 text-primary" />
-                <span>usando</span>
+                <span>using</span>
                 <span class="text-foreground">Astro</span>
             </div>
         </div>

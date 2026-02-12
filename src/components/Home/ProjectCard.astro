@@ -47,7 +47,7 @@ const modalId = `modal-${title.replace(/\s+/g, "-").toLowerCase()}`;
                             rel="noopener noreferrer"
                             class="p-3 rounded-full bg-background/80 text-foreground hover:bg-primary hover:text-white transition-all transform translate-y-4 group-hover:translate-y-0 duration-300 shadow-xl"
                             aria-label="View code on GitHub"
-                            title="Ver Código"
+                            title="View Code"
                         >
                             <Icon name="lucide:github" class="w-6 h-6" aria-hidden="true" />
                         </a>
@@ -59,7 +59,7 @@ const modalId = `modal-${title.replace(/\s+/g, "-").toLowerCase()}`;
                             rel="noopener noreferrer"
                             class="p-3 rounded-full bg-background/80 text-foreground hover:bg-primary hover:text-white transition-all transform translate-y-4 group-hover:translate-y-0 duration-300 delay-75 shadow-xl"
                             aria-label="View live demo"
-                            title="Ver Demo"
+                            title="View Demo"
                         >
                             <Icon name="lucide:external-link" class="w-6 h-6" aria-hidden="true" />
                         </a>
@@ -92,7 +92,7 @@ const modalId = `modal-${title.replace(/\s+/g, "-").toLowerCase()}`;
                 data-open-modal={modalId}
                 class="text-sm font-mono text-primary/90 hover:text-primary hover:underline mb-6 cursor-pointer block transition-colors duration-200"
             >
-                Ver descripción completa →
+                View full description →
             </button>
         </div>
 
@@ -124,7 +124,7 @@ const modalId = `modal-${title.replace(/\s+/g, "-").toLowerCase()}`;
         }
         <div class="space-y-4">
             <h4 class="text-lg font-bold text-foreground font-mono italic">
-                Sobre el proyecto
+                About the project
             </h4>
             <p class="text-muted-foreground leading-relaxed">
                 {description}
@@ -151,7 +151,7 @@ const modalId = `modal-${title.replace(/\s+/g, "-").toLowerCase()}`;
                         class="flex-1 flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-secondary text-foreground hover:bg-primary hover:text-white transition-all duration-300 border border-border"
                     >
                         <Icon name="lucide:github" class="size-5" />
-                        <span class="font-mono text-sm">Código</span>
+                        <span class="font-mono text-sm">Code</span>
                     </a>
                 )
             }
@@ -164,7 +164,7 @@ const modalId = `modal-${title.replace(/\s+/g, "-").toLowerCase()}`;
                         class="flex-1 flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-primary text-white hover:opacity-90 transition-all duration-300 shadow-lg shadow-primary/20"
                     >
                         <Icon name="lucide:external-link" class="size-5" />
-                        <span class="font-mono text-sm">Demo en vivo</span>
+                        <span class="font-mono text-sm">Live Demo</span>
                     </a>
                 )
             }
