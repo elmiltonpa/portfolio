@@ -4,22 +4,42 @@ import { Icon } from "astro-icon/components";
 interface Props {
     name: string;
     icon?: string;
+    level?: number;
 }
 
-const { name, icon } = Astro.props;
+const { name, icon, level } = Astro.props;
 ---
 
-<div
-    class="flex items-center gap-2 px-4 py-2 bg-secondary rounded-lg border border-border hover:border-primary/50 hover:bg-secondary/80 transition-all duration-300 group"
->
+<div class="space-y-2">
+    <div
+        class="flex items-center gap-2 px-4 py-2 bg-secondary rounded-lg border border-border hover:border-primary/50 hover:bg-secondary/80 transition-all duration-300 group"
+    >
+        {
+            icon && (
+                <span class="text-primary group-hover:scale-110 transition-transform">
+                    <Icon name={icon} class="size-5" />
+                </span>
+            )
+        }
+        <span class="font-mono text-sm text-secondary-foreground flex-1">
+            {name}
+        </span>
+        {
+            level && (
+                <span class="font-mono text-xs text-primary font-bold">
+                    {level}%
+                </span>
+            )
+        }
+    </div>
     {
-        icon && (
-            <span class="text-primary group-hover:scale-110 transition-transform">
-                <Icon name={icon} class="size-5" />
-            </span>
+        level && (
+            <div class="w-full bg-muted rounded-full h-2 overflow-hidden">
+                <div
+                    class="h-full bg-linear-to-r from-primary to-accent rounded-full transition-all duration-1000 ease-out"
+                    style={`width: ${level}%`}
+                />
+            </div>
         )
     }
-    <span class="font-mono text-sm text-secondary-foreground">
-        {name}
-    </span>
 </div>

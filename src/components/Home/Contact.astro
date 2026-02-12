@@ -31,7 +31,6 @@ if (Astro.request.method === "POST") {
                         href="#"
                         class="text-lg md:text-xl text-foreground font-mono hover:text-primary transition-colors block underline decoration-primary/30 underline-offset-8"
                     >
-                        <!-- Se cargará mediante JS -->
                     </a>
                 </div>
             </div>
@@ -115,12 +114,12 @@ if (Astro.request.method === "POST") {
 </section>
 
 <script>
-    const emailLink = document.getElementById('email-contact');
+    const emailLink = document.getElementById("email-contact");
     if (emailLink) {
-        const u = 'elmiltonibarra';
-        const d = 'gmail.com';
+        const u = "elmiltonibarra";
+        const d = "gmail.com";
         const email = `${u}@${d}`;
-        emailLink.setAttribute('href', `mailto:${email}`);
+        emailLink.setAttribute("href", `mailto:${email}`);
         emailLink.textContent = email;
     }
 </script>
