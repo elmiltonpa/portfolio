@@ -6,28 +6,40 @@ if (Astro.request.method === "POST") {
 }
 ---
 
-<section id="contact" class="bg-card">
+<section id="contact" class="bg-bg-transparent">
     <div class="section-container">
-        <div class="grid lg:grid-cols-4 gap-12 items-start">
-            <div class="lg:col-span-1 space-y-6">
-                <h2 class="section-title text-foreground">Contacto</h2>
+        <h2 class="section-title text-foreground">Contacto</h2>
 
-                <div class="w-16 h-1 bg-primary rounded-full"></div>
-
-                <p class="text-muted-foreground leading-relaxed max-w-md">
-                    ¿Tienes un proyecto en mente o una oportunidad interesante?
-                    Me encantaría escucharte.
+        <div class="grid lg:grid-cols-3 gap-16 items-start">
+            <div class="lg:col-span-1 space-y-8">
+                <p
+                    class="text-2xl md:text-3xl font-bold text-foreground leading-tight"
+                >
+                    ¿Tienes una idea en mente? <span class="text-primary"
+                        >Hablemos.</span
+                    >
                 </p>
 
-                <p class="text-sm text-muted-foreground/70 font-mono">
-                    elmiltonibarra@gmail.com
-                </p>
+                <div class="space-y-4">
+                    <p
+                        class="text-sm font-mono text-muted-foreground uppercase tracking-widest"
+                    >
+                        Contacto directo
+                    </p>
+                    <a
+                        id="email-contact"
+                        href="#"
+                        class="text-lg md:text-xl text-foreground font-mono hover:text-primary transition-colors block underline decoration-primary/30 underline-offset-8"
+                    >
+                        <!-- Se cargará mediante JS -->
+                    </a>
+                </div>
             </div>
 
-            <div class="lg:col-span-3">
+            <div class="lg:col-span-2">
                 <form
                     method="POST"
-                    class="bg-background/70 backdrop-blur border border-border/60 shadow-xl rounded-2xl p-10 space-y-6"
+                    class="bg-background/70 border border-border/60 shadow-xl rounded-2xl p-10 space-y-6 text-left"
                 >
                     <div class="grid sm:grid-cols-2 gap-5">
                         <input
@@ -36,10 +48,11 @@ if (Astro.request.method === "POST") {
                             name="name"
                             placeholder="Nombre"
                             required
+                            autocomplete="name"
                             class="w-full px-4 py-4 rounded-xl border border-border bg-card
                         text-foreground placeholder:text-muted-foreground/50
                         focus:border-primary focus:ring-2 focus:ring-primary/20
-                        hover:border-primary/40
+                        hover:border-primary/40 text-left
                         outline-none transition-all"
                         />
 
@@ -49,10 +62,11 @@ if (Astro.request.method === "POST") {
                             name="email"
                             placeholder="Email"
                             required
+                            autocomplete="email"
                             class="w-full px-4 py-4 rounded-xl border border-border bg-card
                         text-foreground placeholder:text-muted-foreground/50
                         focus:border-primary focus:ring-2 focus:ring-primary/20
-                        hover:border-primary/40
+                        hover:border-primary/40 text-left
                         outline-none transition-all"
                         />
                     </div>
@@ -62,11 +76,12 @@ if (Astro.request.method === "POST") {
                         id="subject"
                         name="subject"
                         placeholder="Asunto"
+                        autocomplete="off"
                         required
                         class="w-full px-4 py-4 rounded-xl border border-border bg-card
                     text-foreground placeholder:text-muted-foreground/50
                     focus:border-primary focus:ring-2 focus:ring-primary/20
-                    hover:border-primary/40
+                    hover:border-primary/40 text-left
                     outline-none transition-all"
                     />
 
@@ -79,7 +94,7 @@ if (Astro.request.method === "POST") {
                         class="w-full px-4 py-4 rounded-xl border border-border bg-card
                     text-foreground placeholder:text-muted-foreground/50
                     focus:border-primary focus:ring-2 focus:ring-primary/20
-                    hover:border-primary/40
+                    hover:border-primary/40 text-left
                     outline-none transition-all resize-none"
                     ></textarea>
 
@@ -98,3 +113,14 @@ if (Astro.request.method === "POST") {
         </div>
     </div>
 </section>
+
+<script>
+    const emailLink = document.getElementById('email-contact');
+    if (emailLink) {
+        const u = 'elmiltonibarra';
+        const d = 'gmail.com';
+        const email = `${u}@${d}`;
+        emailLink.setAttribute('href', `mailto:${email}`);
+        emailLink.textContent = email;
+    }
+</script>
