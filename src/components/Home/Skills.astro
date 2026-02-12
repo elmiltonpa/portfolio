@@ -6,7 +6,6 @@ const skills = [
         category: "Backend",
         icon: "lucide:server",
         items: [
-            { name: "Python", icon: "simple-icons:python" },
             { name: "Node.js", icon: "simple-icons:nodedotjs" },
             { name: "Express.js", icon: "lucide:code" },
             { name: "TypeScript", icon: "simple-icons:typescript" },
@@ -43,7 +42,18 @@ const skills = [
             { name: "Docker", icon: "simple-icons:docker" },
             { name: "Git", icon: "simple-icons:git" },
             { name: "Postman", icon: "simple-icons:postman" },
-            { name: "Linux", icon: "simple-icons:linux" },
+        ],
+    },
+    {
+        category: "Computer Science",
+        icon: "lucide:brain",
+        items: [
+            { name: "Data Structures", icon: "lucide:list" },
+            { name: "Algorithms", icon: "lucide:cpu" },
+            { name: "Design Patterns", icon: "lucide:box" },
+            { name: "Agile Methodologies", icon: "lucide:users" },
+            { name: "System Design", icon: "lucide:workflow" },
+            { name: "Testing", icon: "lucide:check-circle" },
         ],
     },
 ];
@@ -65,13 +75,6 @@ const skills = [
 
     <div class="section-container relative z-10">
         <h2 class="section-title text-foreground">Habilidades</h2>
-
-        <p
-            class="text-muted-foreground text-center max-w-2xl mx-auto -mt-8 mb-16"
-        >
-            Tecnologías y herramientas que estoy aprendiendo y aplicando en mis
-            proyectos académicos y personales.
-        </p>
 
         <div
             class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto"
