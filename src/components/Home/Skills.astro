@@ -83,7 +83,7 @@ const skills = [
         <h2 class="section-title text-foreground">Habilidades</h2>
 
         <div
-            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto"
+            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto skills-grid"
         >
             {
                 skills.map((group, i) => (
@@ -136,5 +136,13 @@ const skills = [
     .skill-card:hover {
         transform: translateY(-4px);
         box-shadow: 0 20px 40px -20px rgba(128, 90, 213, 0.15);
+    }
+
+    @media (min-width: 1024px) {
+        .skills-grid > :nth-child(4),
+        .skills-grid > :nth-child(5) {
+            grid-column: 2;
+            justify-self: center;
+        }
     }
 </style>
