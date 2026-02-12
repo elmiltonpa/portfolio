@@ -9,7 +9,7 @@ const navItems = [
 
 <header
     id="main-header"
-    class="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
+    class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-background"
 >
     <div class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
         <a
@@ -103,29 +103,29 @@ const navItems = [
         transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    .header-scrolled {
-        background-color: rgba(9, 9, 11, 0.8);
-        backdrop-filter: blur(16px) saturate(180%);
-        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
-    }
-    
-    .header-scrolled::after {
-        content: '';
+    header::after {
+        content: "";
         position: absolute;
         bottom: 0;
         left: 0;
         width: 100%;
         height: 1px;
         background: linear-gradient(
-            90deg, 
-            transparent, 
-            rgba(128, 90, 213, 0.1) 20%, 
-            rgba(128, 90, 213, 0.8) 50%, 
-            rgba(128, 90, 213, 0.1) 80%, 
+            90deg,
+            transparent,
+            rgba(128, 90, 213, 0.1) 20%,
+            rgba(128, 90, 213, 0.8) 50%,
+            rgba(128, 90, 213, 0.1) 80%,
             transparent
         );
         background-size: 200% 100%;
         animation: light-travel 5s linear infinite;
+    }
+
+    .header-scrolled {
+        background-color: rgba(9, 9, 11, 0.8) !important;
+        backdrop-filter: blur(16px) saturate(180%);
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
     }
 
     @keyframes light-travel {
@@ -165,7 +165,7 @@ const navItems = [
         };
 
         window.addEventListener("scroll", handleScroll, { passive: true });
-        handleScroll(); // Call on init to check position after reload
+        handleScroll();
         menuToggle?.addEventListener("click", toggleMenu);
         mobileLinks.forEach((link) =>
             link.addEventListener("click", toggleMenu),
