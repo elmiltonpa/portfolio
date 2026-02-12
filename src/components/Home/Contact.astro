@@ -41,61 +41,85 @@ if (Astro.request.method === "POST") {
                     class="bg-background/70 border border-border/60 shadow-xl rounded-2xl p-10 space-y-6 text-left"
                 >
                     <div class="grid sm:grid-cols-2 gap-5">
-                        <input
-                            type="text"
-                            id="name"
-                            name="name"
-                            placeholder="Nombre"
-                            required
-                            autocomplete="name"
-                            class="w-full px-4 py-4 rounded-xl border border-border bg-card
-                        text-foreground placeholder:text-muted-foreground/50
-                        focus:border-primary focus:ring-2 focus:ring-primary/20
-                        hover:border-primary/40 text-left
-                        outline-none transition-all"
-                        />
+                        <div class="relative group">
+                            <input
+                                type="text"
+                                id="name"
+                                name="name"
+                                placeholder=" "
+                                required
+                                autocomplete="off"
+                                class="peer w-full px-4 pt-6 pb-2 rounded-xl border border-border bg-card text-foreground focus:border-primary focus:ring-2 focus:ring-primary/20 hover:border-primary/40 outline-none transition-all"
+                            />
+                            <label
+                                for="name"
+                                class="absolute left-4 top-4 text-muted-foreground/50 transition-all duration-200 pointer-events-none
+                                peer-focus:-translate-y-3 peer-focus:text-xs peer-focus:text-primary
+                                peer-[:not(:placeholder-shown)]:-translate-y-3 peer-[:not(:placeholder-shown)]:text-xs"
+                            >
+                                Nombre
+                            </label>
+                        </div>
 
-                        <input
-                            type="email"
-                            id="email"
-                            name="email"
-                            placeholder="Email"
-                            required
-                            autocomplete="email"
-                            class="w-full px-4 py-4 rounded-xl border border-border bg-card
-                        text-foreground placeholder:text-muted-foreground/50
-                        focus:border-primary focus:ring-2 focus:ring-primary/20
-                        hover:border-primary/40 text-left
-                        outline-none transition-all"
-                        />
+                        <div class="relative group">
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                placeholder=" "
+                                required
+                                autocomplete="email"
+                                class="peer w-full px-4 pt-6 pb-2 rounded-xl border border-border bg-card text-foreground focus:border-primary focus:ring-2 focus:ring-primary/20 hover:border-primary/40 outline-none transition-all"
+                            />
+                            <label
+                                for="email"
+                                class="absolute left-4 top-4 text-muted-foreground/50 transition-all duration-200 pointer-events-none
+                                        peer-focus:-translate-y-3 peer-focus:text-xs peer-focus:text-primary
+                                        peer-[:not(:placeholder-shown)]:-translate-y-3 peer-[:not(:placeholder-shown)]:text-xs"
+                            >
+                                Email
+                            </label>
+                        </div>
                     </div>
 
-                    <input
-                        type="text"
-                        id="subject"
-                        name="subject"
-                        placeholder="Asunto"
-                        autocomplete="off"
-                        required
-                        class="w-full px-4 py-4 rounded-xl border border-border bg-card
-                    text-foreground placeholder:text-muted-foreground/50
-                    focus:border-primary focus:ring-2 focus:ring-primary/20
-                    hover:border-primary/40 text-left
-                    outline-none transition-all"
-                    />
+                    <div class="relative group">
+                        <input
+                            type="text"
+                            id="subject"
+                            name="subject"
+                            placeholder=" "
+                            required
+                            autocomplete="off"
+                            class="peer w-full px-4 pt-6 pb-2 rounded-xl border border-border bg-card text-foreground focus:border-primary focus:ring-2 focus:ring-primary/20 hover:border-primary/40 outline-none transition-all"
+                        />
+                        <label
+                            for="subject"
+                            class="absolute left-4 top-4 text-muted-foreground/50 transition-all duration-200 pointer-events-none
+                            peer-focus:-translate-y-3 peer-focus:text-xs peer-focus:text-primary
+                            peer-[:not(:placeholder-shown)]:-translate-y-3 peer-[:not(:placeholder-shown)]:text-xs"
+                        >
+                            Asunto
+                        </label>
+                    </div>
 
-                    <textarea
-                        id="message"
-                        name="message"
-                        rows="5"
-                        placeholder="Tu mensaje..."
-                        required
-                        class="w-full px-4 py-4 rounded-xl border border-border bg-card
-                    text-foreground placeholder:text-muted-foreground/50
-                    focus:border-primary focus:ring-2 focus:ring-primary/20
-                    hover:border-primary/40 text-left
-                    outline-none transition-all resize-none"
-                    ></textarea>
+                    <div class="relative group">
+                        <textarea
+                            id="message"
+                            name="message"
+                            rows="5"
+                            placeholder=" "
+                            required
+                            class="peer w-full px-4 pt-8 pb-2 rounded-xl border border-border bg-card text-foreground focus:border-primary focus:ring-2 focus:ring-primary/20 hover:border-primary/40 outline-none transition-all resize-none"
+                        ></textarea>
+                        <label
+                            for="message"
+                            class="absolute left-4 top-5 text-muted-foreground/50 transition-all duration-200 pointer-events-none
+                            peer-focus:-translate-y-3 peer-focus:text-xs peer-focus:text-primary
+                            peer-[:not(:placeholder-shown)]:-translate-y-3 peer-[:not(:placeholder-shown)]:text-xs"
+                        >
+                            Tu mensaje...
+                        </label>
+                    </div>
 
                     <div class="flex justify-end">
                         <Button
@@ -112,6 +136,13 @@ if (Astro.request.method === "POST") {
         </div>
     </div>
 </section>
+
+<style>
+    input:-webkit-autofill {
+        -webkit-box-shadow: 0 0 0px 1000px #111114 inset !important;
+        -webkit-text-fill-color: white !important;
+    }
+</style>
 
 <script>
     const emailLink = document.getElementById("email-contact");

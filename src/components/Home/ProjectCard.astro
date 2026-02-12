@@ -88,7 +88,7 @@ const { title, description, tags = [], github, link, image } = Astro.props;
         <div class="flex flex-wrap gap-2 mt-auto pt-4">
             {
                 tags.map((tech) => (
-                    <span class="text-[10px] md:text-xs font-mono font-medium tracking-wider uppercase text-primary/80 bg-primary/5 px-2.5 py-1 rounded-md border border-primary/10">
+                    <span class="text-xs font-mono font-semibold tracking-wider uppercase text-primary bg-primary/10 px-3 py-1.5 rounded-lg border border-primary/25 hover:bg-primary/15 hover:border-primary/40 hover:scale-105 transition-all duration-300 cursor-default">
                         {tech}
                     </span>
                 ))

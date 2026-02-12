@@ -6,12 +6,12 @@ const skills = [
         category: "Languages",
         icon: "lucide:code-2",
         items: [
+            { name: "Rust", icon: "simple-icons:rust" },
+            { name: "TypeScript", icon: "simple-icons:typescript" },
+            { name: "JavaScript", icon: "simple-icons:javascript" },
             { name: "C#", icon: "simple-icons:csharp" },
             { name: "CSS", icon: "simple-icons:css3" },
             { name: "HTML5", icon: "simple-icons:html5" },
-            { name: "JavaScript", icon: "simple-icons:javascript" },
-            { name: "TypeScript", icon: "simple-icons:typescript" },
-            { name: "Rust", icon: "simple-icons:rust" },
         ],
     },
     {
@@ -27,6 +27,18 @@ const skills = [
             { name: "React", icon: "simple-icons:react" },
             { name: "Tailwind CSS", icon: "simple-icons:tailwindcss" },
             { name: "Vite", icon: "simple-icons:vite" },
+        ],
+    },
+    {
+        category: "Computer Science",
+        icon: "lucide:brain",
+        items: [
+            { name: "Data Structures", icon: "lucide:list" },
+            { name: "Algorithms", icon: "lucide:cpu" },
+            { name: "Design Patterns", icon: "lucide:box" },
+            { name: "Agile Methodologies", icon: "lucide:users" },
+            { name: "System Design", icon: "lucide:workflow" },
+            { name: "Testing", icon: "lucide:check-circle" },
         ],
     },
     {
@@ -50,18 +62,6 @@ const skills = [
             { name: "Postman", icon: "simple-icons:postman" },
         ],
     },
-    {
-        category: "Computer Science",
-        icon: "lucide:brain",
-        items: [
-            { name: "Data Structures", icon: "lucide:list" },
-            { name: "Algorithms", icon: "lucide:cpu" },
-            { name: "Design Patterns", icon: "lucide:box" },
-            { name: "Agile Methodologies", icon: "lucide:users" },
-            { name: "System Design", icon: "lucide:workflow" },
-            { name: "Testing", icon: "lucide:check-circle" },
-        ],
-    },
 ];
 ---
 
@@ -83,13 +83,14 @@ const skills = [
         <h2 class="section-title text-foreground">Habilidades</h2>
 
         <div
-            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto skills-grid"
+            class="flex flex-wrap justify-center gap-6 max-w-6xl mx-auto skills-grid"
         >
             {
                 skills.map((group, i) => (
                     <div
                         class={`skill-card group relative bg-card/50 backdrop-blur-sm border border-border rounded-xl p-6
-                        hover:border-primary/50 transition-all duration-300 animate-fade-up stagger-${i + 1}`}
+                        hover:border-primary/50 transition-all duration-300 animate-fade-up stagger-${i + 1}
+                        w-full sm:w-[calc(50%-1.5rem)] lg:w-[calc(33.333%-2rem)]`}
                     >
                         <div class="absolute inset-0 rounded-xl bg-linear-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
 

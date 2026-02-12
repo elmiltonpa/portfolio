@@ -32,19 +32,6 @@
         @apply bg-background text-foreground font-sans antialiased relative min-h-screen;
     }
 
-    input:-webkit-autofill,
-    input:-webkit-autofill:hover,
-    input:-webkit-autofill:focus,
-    textarea:-webkit-autofill {
-        -webkit-text-fill-color: #ffffff !important;
-
-        -webkit-box-shadow: 0 0 0px 1000px #111114 inset !important;
-        box-shadow: 0 0 0px 1000px #111114 inset !important;
-
-        font-family: inherit !important;
-        font-size: inherit !important;
-    }
-
     body::before {
         content: "";
         @apply fixed inset-0 z-[-1] pointer-events-none opacity-[0.05];
