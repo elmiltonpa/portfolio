@@ -4,17 +4,24 @@ import { Icon } from "astro-icon/components";
 const currentYear = new Date().getFullYear();
 
 const navItems = [
-    { name: "Inicio", href: "#" },
+    { name: "Inicio", href: "/" },
     { name: "Sobre mi", href: "#about" },
     { name: "Habilidades", href: "#skills" },
     { name: "Proyectos", href: "#projects" },
-    { name: "Juegos", href: "#games" },
     { name: "Contacto", href: "#contact" },
 ];
 
 const socials = [
-    { icon: "lucide:github", href: "#", label: "GitHub" },
-    { icon: "lucide:linkedin", href: "#", label: "LinkedIn" },
+    {
+        icon: "lucide:github",
+        href: "https://github.com/elmiltonpa",
+        label: "GitHub",
+    },
+    {
+        icon: "lucide:linkedin",
+        href: "https://www.linkedin.com/in/milton-ibarra-ba1020205/",
+        label: "LinkedIn",
+    },
 ];
 ---
 
@@ -24,15 +31,17 @@ const socials = [
             <div class="space-y-4">
                 <a
                     href="/"
-                    class="font-mono text-xl font-bold text-primary hover:opacity-80 transition-opacity"
+                    class="font-mono text-xl font-bold hover:opacity-80 transition-opacity"
                 >
-                    &lt;dev /&gt;
+                    <span class="text-primary">&#123;</span>
+                    <span class="text-foreground mx-1">m.i</span>
+                    <span class="text-primary">&#125;</span>
                 </a>
                 <p
                     class="text-muted-foreground text-sm leading-relaxed max-w-xs"
                 >
-                    Desarrollador Backend enfocado en crear sistemas eficientes
-                    y experiencias digitales robustas.
+                    Ingeniería backend con enfoque en escalabilidad, rendimiento
+                    y código limpio.
                 </p>
             </div>
             <div>

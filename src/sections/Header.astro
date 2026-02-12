@@ -3,7 +3,6 @@ const navItems = [
     { name: "Sobre mí", href: "#about" },
     { name: "Habilidades", href: "#skills" },
     { name: "Proyectos", href: "#projects" },
-    { name: "Juegos", href: "#games" },
     { name: "Contacto", href: "#contact" },
 ];
 ---
@@ -15,9 +14,11 @@ const navItems = [
     <div class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
         <a
             href="/"
-            class="font-mono text-lg font-bold text-primary hover:opacity-80 transition-opacity"
+            class="font-mono text-lg font-bold hover:opacity-80 transition-opacity"
         >
-            &lt;dev /&gt;
+            <span class="text-primary">&#123;</span>
+            <span class="text-foreground mx-1">m.i</span>
+            <span class="text-primary">&#125;</span>
         </a>
 
         <nav class="hidden md:block" aria-label="Main Navigation">
@@ -126,6 +127,7 @@ const navItems = [
         };
 
         window.addEventListener("scroll", handleScroll, { passive: true });
+        handleScroll(); // Call on init to check position after reload
         menuToggle?.addEventListener("click", toggleMenu);
         mobileLinks.forEach((link) =>
             link.addEventListener("click", toggleMenu),
