@@ -1,63 +1,115 @@
 ---
 import { Icon } from "astro-icon/components";
-import SkillBadge from "../ui/SkillBadge.astro";
 
-const skillCategories = [
+const skills = [
     {
-        title: "Backend & Core",
-        icon: "lucide:cpu",
-        skills: [
-            { name: "Python", icon: "lucide:code-2" },
-            { name: "Node.js", icon: "lucide:hexagon" },
-            { name: "Rust", icon: "lucide:code-2" },
+        category: "Backend",
+        icon: "lucide:server",
+        items: [
+            { name: "Python", icon: "simple-icons:python" },
+            { name: "Node.js", icon: "simple-icons:nodedotjs" },
+            { name: "Rust", icon: "simple-icons:rust" },
+            { name: "TypeScript", icon: "simple-icons:typescript" },
         ],
     },
     {
-        title: "Databases & Storage",
+        category: "Frontend",
+        icon: "lucide:layout",
+        items: [
+            { name: "React", icon: "simple-icons:react" },
+            { name: "HTML/CSS", icon: "simple-icons:html5" },
+            { name: "Tailwind", icon: "simple-icons:tailwindcss" },
+        ],
+    },
+    {
+        category: "Databases",
         icon: "lucide:database",
-        skills: [
-            { name: "PostgreSQL", icon: "lucide:database" },
-            { name: "Redis", icon: "lucide:zap" },
-            { name: "MongoDB", icon: "lucide:leaf" },
+        items: [
+            { name: "PostgreSQL", icon: "simple-icons:postgresql" },
+            { name: "Redis", icon: "simple-icons:redis" },
+            { name: "MongoDB", icon: "simple-icons:mongodb" },
         ],
     },
     {
-        title: "DevOps & Infrastructure",
+        category: "DevOps",
         icon: "lucide:cloud",
-        skills: [
-            { name: "Docker", icon: "lucide:box" },
-            { name: "AWS", icon: "lucide:cloud" },
-            { name: "Linux", icon: "lucide:terminal" },
-            { name: "Git", icon: "lucide:git-branch" },
+        items: [
+            { name: "Docker", icon: "simple-icons:docker" },
+            { name: "AWS", icon: "simple-icons:amazonwebservices" },
+            { name: "Linux", icon: "simple-icons:linux" },
+            { name: "Git", icon: "simple-icons:git" },
         ],
+    },
+    {
+        category: "Tools",
+        icon: "lucide:wrench",
+        items: [{ name: "Figma", icon: "simple-icons:figma" }],
     },
 ];
 ---
 
-<section id="skills" class="bg-transparent min-h-screen">
-    <div class="section-container">
+<section id="skills" class="relative bg-transparent overflow-hidden">
+    <div
+        class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full max-w-7xl pointer-events-none"
+    >
+        <div
+            class="absolute top-1/3 -right-20 w-72 h-72 bg-primary/5 rounded-full blur-[100px]"
+        >
+        </div>
+        <div
+            class="absolute bottom-1/3 -left-20 w-72 h-72 bg-accent/5 rounded-full blur-[100px]"
+        >
+        </div>
+    </div>
+
+    <div class="section-container relative z-10">
         <h2 class="section-title text-foreground">Habilidades</h2>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {
-                skillCategories.map((category) => (
-                    <div class="space-y-6">
-                        <div class="flex items-center gap-3 group">
-                            <div class="p-2 rounded-lg bg-primary/10 text-primary border border-primary/20">
-                                <Icon name={category.icon} class="size-5" />
-                            </div>
-                            <h3 class="font-mono text-lg font-bold text-foreground">
-                                {category.title}
-                            </h3>
-                        </div>
+        <p
+            class="text-muted-foreground text-center max-w-2xl mx-auto -mt-8 mb-16"
+        >
+            Tecnologías y herramientas que estoy aprendiendo y aplicando en mis
+            proyectos académicos y personales.
+        </p>
 
-                        <div class="flex flex-col gap-3">
-                            {category.skills.map((skill) => (
-                                <SkillBadge
-                                    name={skill.name}
-                                    icon={skill.icon}
-                                />
-                            ))}
+        <div
+            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto"
+        >
+            {
+                skills.map((group, i) => (
+                    <div
+                        class={`skill-card group relative bg-card/50 backdrop-blur-sm border border-border rounded-xl p-6
+                        hover:border-primary/50 transition-all duration-300 animate-fade-up stagger-${i + 1}`}
+                    >
+                        <div class="absolute inset-0 rounded-xl bg-linear-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+
+                        <div class="relative z-10">
+                            <div class="flex items-center gap-3 mb-5">
+                                <div class="p-2 rounded-lg bg-primary/10 text-primary group-hover:bg-primary/20 transition-colors">
+                                    <Icon name={group.icon} class="size-5" />
+                                </div>
+                                <h3 class="text-sm text-foreground tracking-wide uppercase font-mono font-semibold">
+                                    {group.category}
+                                </h3>
+                            </div>
+
+                            <div class="flex flex-wrap gap-2">
+                                {group.items.map((item) => (
+                                    <div
+                                        class="skill-item flex items-center gap-2 px-3 py-2 bg-secondary/50 rounded-lg
+                                        border border-transparent hover:border-primary/30 hover:bg-secondary
+                                        transition-all duration-200 cursor-default group/item"
+                                    >
+                                        <Icon
+                                            name={item.icon}
+                                            class="size-4 text-muted-foreground group-hover/item:text-primary transition-colors"
+                                        />
+                                        <span class="text-sm text-secondary-foreground group-hover/item:text-foreground transition-colors font-mono">
+                                            {item.name}
+                                        </span>
+                                    </div>
+                                ))}
+                            </div>
                         </div>
                     </div>
                 ))
@@ -65,3 +117,14 @@ const skillCategories = [
         </div>
     </div>
 </section>
+
+<style>
+    .skill-card {
+        transform: translateY(0);
+    }
+
+    .skill-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 20px 40px -20px rgba(128, 90, 213, 0.15);
+    }
+</style>
