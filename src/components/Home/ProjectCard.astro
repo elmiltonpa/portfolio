@@ -2,6 +2,7 @@
 import { cn } from "../../lib/utils";
 import Button from "../ui/Button.astro";
 import { Image } from "astro:assets";
+import { Icon } from "astro-icon/components";
 
 import type { ImageMetadata } from "astro";
 
@@ -20,92 +21,67 @@ const { title, description, tags = [], github, link, image } = Astro.props;
 
 <article
     class={cn(
-        "group relative p-6 rounded-2xl border border-white/5 flex flex-col transition-all duration-500 card-glow shadow-2xl",
-        "hover:border-primary/50",
+        "group relative flex flex-col bg-secondary/30 rounded-3xl border border-white/5 overflow-hidden transition-all duration-500",
+        "hover:border-primary/30 hover:bg-secondary/50 hover:-translate-y-1 shadow-2xl",
     )}
-    style="background-color: #222228; --primary-rgb: 128, 90, 213;"
 >
+    <!-- Image Header -->
     {
         image && (
-            <div class="relative w-full aspect-video mb-4 overflow-hidden rounded-md border border-border">
+            <div class="relative w-full aspect-[16/9] overflow-hidden">
+                <div class="absolute inset-0 bg-linear-to-t from-background/80 via-transparent to-transparent z-10 opacity-60" />
                 <Image
                     src={image}
                     alt={title}
                     width={800}
                     height={450}
                     format="webp"
-                    class="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                    class="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
                 />
+                
+                <!-- Quick Action Overlay -->
+                <div class="absolute inset-0 z-20 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 backdrop-blur-xs bg-background/20">
+                     {github && (
+                        <a href={github} target="_blank" rel="noopener noreferrer" 
+                           class="p-3 rounded-full bg-background/80 text-foreground hover:bg-primary hover:text-white transition-all transform translate-y-4 group-hover:translate-y-0 duration-300 shadow-xl"
+                           title="Ver Código">
+                            <Icon name="lucide:github" class="w-6 h-6" />
+                        </a>
+                    )}
+                    {link && (
+                        <a href={link} target="_blank" rel="noopener noreferrer" 
+                           class="p-3 rounded-full bg-background/80 text-foreground hover:bg-primary hover:text-white transition-all transform translate-y-4 group-hover:translate-y-0 duration-300 delay-75 shadow-xl"
+                           title="Ver Demo">
+                            <Icon name="lucide:external-link" class="w-6 h-6" />
+                        </a>
+                    )}
+                </div>
             </div>
         )
     }
 
-    <div class="relative z-10 flex flex-col grow">
-        <div class="flex items-start justify-between mb-2">
-            <h3
-                class="font-mono text-lg font-semibold text-foreground group-hover:text-primary transition-colors"
-            >
+    <!-- Content Body -->
+    <div class="flex flex-col grow p-6 md:p-8">
+        <div class="flex items-center gap-3 mb-3">
+            <h3 class="text-xl font-bold text-foreground group-hover:text-primary transition-colors">
                 {title}
             </h3>
+            <div class="h-px grow bg-white/5 group-hover:bg-primary/20 transition-colors" />
         </div>
 
-        <p class="text-muted-foreground text-sm mb-6 leading-relaxed">
+        <p class="text-muted-foreground text-sm md:text-base mb-6 line-clamp-3 leading-relaxed">
             {description}
         </p>
 
-        <div class="flex flex-wrap gap-2 mb-8">
+        <!-- Tech Stack -->
+        <div class="flex flex-wrap gap-2 mt-auto pt-4">
             {
                 tags.map((tech) => (
-                    <span class="font-mono text-sm font-medium text-foreground/80 bg-white/5 px-3 py-1 rounded-full border border-white/10 hover:border-primary/40 hover:text-foreground transition-all duration-300">
+                    <span class="text-[10px] md:text-xs font-mono font-medium tracking-wider uppercase text-primary/80 bg-primary/5 px-2.5 py-1 rounded-md border border-primary/10">
                         {tech}
                     </span>
                 ))
             }
         </div>
-
-        <div class="grid grid-cols-2 gap-3 mt-auto">
-            {
-                github && (
-                    <Button
-                        href={github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        variant="outline"
-                        size="sm"
-                        icon="lucide:github"
-                        class={cn(
-                            "font-mono text-xs py-2 h-auto",
-                            !link && "col-span-2",
-                        )}
-                    >
-                        Código
-                    </Button>
-                )
-            }
-            {
-                link && (
-                    <Button
-                        href={link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        variant="default"
-                        size="sm"
-                        icon="lucide:external-link"
-                        class={cn(
-                            "font-mono text-xs py-2 h-auto",
-                            !github && "col-span-2",
-                        )}
-                    >
-                        Demo
-                    </Button>
-                )
-            }
-        </div>
     </div>
 </article>
-
-<style>
-    .card-glow:hover {
-        box-shadow: 0 0 20px -5px rgba(var(--primary-rgb), 0.1);
-    }
-</style>
