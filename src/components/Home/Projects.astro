@@ -10,19 +10,32 @@ const projects = (await getCollection("projects")).sort((a, b) => {
 });
 ---
 
-<section id="projects" class="relative bg-background overflow-hidden">
-    <!-- Decorative background element -->
-    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full max-w-7xl pointer-events-none">
-        <div class="absolute top-1/4 -left-20 w-80 h-80 bg-primary/5 rounded-full blur-[120px]"></div>
-        <div class="absolute bottom-1/4 -right-20 w-80 h-80 bg-accent/5 rounded-full blur-[120px]"></div>
+<section
+    id="projects"
+    class="relative bg-background overflow-hidden border-t border-border"
+>
+    <div
+        class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full max-w-7xl pointer-events-none"
+    >
+        <div
+            class="absolute top-1/4 -left-20 w-80 h-80 bg-primary/5 rounded-full blur-[120px]"
+        >
+        </div>
+        <div
+            class="absolute bottom-1/4 -right-20 w-80 h-80 bg-accent/5 rounded-full blur-[120px]"
+        >
+        </div>
     </div>
 
     <div class="section-container relative z-10">
         <h2 class="section-title text-foreground">Proyectos</h2>
-        
-        <p class="text-muted-foreground text-center max-w-2xl mx-auto -mt-8 mb-16">
-            Una selección de mis trabajos más recientes, enfocados en arquitectura backend,
-            escalabilidad y experiencias de usuario fluidas.
+
+        <p
+            class="text-muted-foreground text-center max-w-2xl mx-auto -mt-8 mb-16"
+        >
+            Una selección de mis trabajos más recientes, enfocados en
+            arquitectura backend, escalabilidad y experiencias de usuario
+            fluidas.
         </p>
 
         <div class="grid md:grid-cols-2 gap-8 lg:gap-10">
@@ -53,10 +66,10 @@ const projects = (await getCollection("projects")).sort((a, b) => {
         </div>
 
         <div class="mt-20 flex justify-center">
-            <Button 
-                href="https://github.com/elmiltonpa" 
-                target="_blank" 
-                variant="outline" 
+            <Button
+                href="https://github.com/elmiltonpa"
+                target="_blank"
+                variant="outline"
                 class="group px-8"
                 icon="lucide:github"
             >
