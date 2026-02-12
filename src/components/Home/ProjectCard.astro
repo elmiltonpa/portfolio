@@ -1,8 +1,8 @@
 ---
 import { cn } from "../../lib/utils";
-import Button from "../ui/Button.astro";
 import { Image } from "astro:assets";
 import { Icon } from "astro-icon/components";
+import Modal from "../ui/Modal.astro";
 
 import type { ImageMetadata } from "astro";
 
@@ -17,6 +17,7 @@ interface Props {
 }
 
 const { title, description, tags = [], github, link, image } = Astro.props;
+const modalId = `modal-${title.replace(/\s+/g, "-").toLowerCase()}`;
 ---
 
 <article
@@ -45,9 +46,10 @@ const { title, description, tags = [], github, link, image } = Astro.props;
                             target="_blank"
                             rel="noopener noreferrer"
                             class="p-3 rounded-full bg-background/80 text-foreground hover:bg-primary hover:text-white transition-all transform translate-y-4 group-hover:translate-y-0 duration-300 shadow-xl"
+                            aria-label="View code on GitHub"
                             title="Ver Código"
                         >
-                            <Icon name="lucide:github" class="w-6 h-6" />
+                            <Icon name="lucide:github" class="w-6 h-6" aria-hidden="true" />
                         </a>
                     )}
                     {link && (
@@ -56,9 +58,10 @@ const { title, description, tags = [], github, link, image } = Astro.props;
                             target="_blank"
                             rel="noopener noreferrer"
                             class="p-3 rounded-full bg-background/80 text-foreground hover:bg-primary hover:text-white transition-all transform translate-y-4 group-hover:translate-y-0 duration-300 delay-75 shadow-xl"
+                            aria-label="View live demo"
                             title="Ver Demo"
                         >
-                            <Icon name="lucide:external-link" class="w-6 h-6" />
+                            <Icon name="lucide:external-link" class="w-6 h-6" aria-hidden="true" />
                         </a>
                     )}
                 </div>
@@ -79,11 +82,19 @@ const { title, description, tags = [], github, link, image } = Astro.props;
             </div>
         </div>
 
-        <p
-            class="text-muted-foreground text-sm md:text-base mb-6 line-clamp-3 leading-relaxed"
-        >
-            {description}
-        </p>
+        <div class="relative group/desc">
+            <p
+                class="text-muted-foreground text-sm md:text-base mb-4 line-clamp-3 leading-relaxed"
+            >
+                {description}
+            </p>
+            <button
+                data-open-modal={modalId}
+                class="text-sm font-mono text-primary/90 hover:text-primary hover:underline mb-6 cursor-pointer block transition-colors duration-200"
+            >
+                Ver descripción completa →
+            </button>
+        </div>
 
         <div class="flex flex-wrap gap-2 mt-auto pt-4">
             {
@@ -96,6 +107,99 @@ const { title, description, tags = [], github, link, image } = Astro.props;
         </div>
     </div>
 </article>
+
+<Modal id={modalId} title={title}>
+    <div class="space-y-6">
+        {
+            image && (
+                <Image
+                    src={image}
+                    alt={title}
+                    width={800}
+                    height={450}
+                    format="webp"
+                    class="w-full rounded-2xl border border-border"
+                />
+            )
+        }
+        <div class="space-y-4">
+            <h4 class="text-lg font-bold text-foreground font-mono italic">
+                Sobre el proyecto
+            </h4>
+            <p class="text-muted-foreground leading-relaxed">
+                {description}
+            </p>
+        </div>
+
+        <div class="flex flex-wrap gap-2 pt-4">
+            {
+                tags.map((tech) => (
+                    <span class="text-xs font-mono font-semibold tracking-wider uppercase text-primary bg-primary/10 px-3 py-1.5 rounded-lg border border-primary/25">
+                        {tech}
+                    </span>
+                ))
+            }
+        </div>
+
+        <div class="flex gap-4 pt-6">
+            {
+                github && (
+                    <a
+                        href={github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="flex-1 flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-secondary text-foreground hover:bg-primary hover:text-white transition-all duration-300 border border-border"
+                    >
+                        <Icon name="lucide:github" class="size-5" />
+                        <span class="font-mono text-sm">Código</span>
+                    </a>
+                )
+            }
+            {
+                link && (
+                    <a
+                        href={link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="flex-1 flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-primary text-white hover:opacity-90 transition-all duration-300 shadow-lg shadow-primary/20"
+                    >
+                        <Icon name="lucide:external-link" class="size-5" />
+                        <span class="font-mono text-sm">Demo en vivo</span>
+                    </a>
+                )
+            }
+        </div>
+    </div>
+</Modal>
+
+<script>
+    document.addEventListener("astro:page-load", () => {
+        const openButtons = document.querySelectorAll("[data-open-modal]");
+
+        openButtons.forEach((button) => {
+            button.addEventListener("click", () => {
+                const modalId = button.getAttribute("data-open-modal");
+                if (modalId) {
+                    const modal = document.getElementById(
+                        modalId,
+                    ) as HTMLDialogElement;
+                    if (modal) {
+                        modal.showModal();
+                        document.body.style.overflow = "hidden";
+
+                        modal.addEventListener(
+                            "close",
+                            () => {
+                                document.body.style.overflow = "";
+                            },
+                            { once: true },
+                        );
+                    }
+                }
+            });
+        });
+    });
+</script>
 
 <style>
     .project-card-content {
