@@ -3,25 +3,26 @@ import { Icon } from "astro-icon/components";
 
 const skills = [
     {
-        category: "Backend",
-        icon: "lucide:server",
+        category: "Languages",
+        icon: "lucide:code-2",
+        items: [
+            { name: "Python", icon: "simple-icons:python" },
+            { name: "TypeScript", icon: "simple-icons:typescript" },
+        ],
+    },
+    {
+        category: "Frameworks & Libraries",
+        icon: "lucide:blocks",
         items: [
             { name: "Node.js", icon: "simple-icons:nodedotjs" },
             { name: "Bun", icon: "simple-icons:bun" },
             { name: "Express.js", icon: "lucide:code" },
-            { name: "TypeScript", icon: "simple-icons:typescript" },
+            { name: "React", icon: "simple-icons:react" },
+            { name: "Next.js", icon: "simple-icons:nextdotjs" },
+            { name: "Astro", icon: "simple-icons:astro" },
+            { name: "Tailwind CSS", icon: "simple-icons:tailwindcss" },
             { name: "REST APIs", icon: "lucide:globe" },
             { name: "JWT Auth", icon: "lucide:lock" },
-        ],
-    },
-    {
-        category: "Frontend",
-        icon: "lucide:layout",
-        items: [
-            { name: "Astro", icon: "simple-icons:astro" },
-            { name: "Next.js", icon: "simple-icons:nextdotjs" },
-            { name: "React", icon: "simple-icons:react" },
-            { name: "Tailwind CSS", icon: "simple-icons:tailwindcss" },
         ],
     },
     {
