@@ -1,20 +1,15 @@
 # m.i | Portfolio
 
-Mi portfolio personal y sección de juegos interactivos, construido con Astro v5 y Tailwind CSS v4.
+Mi espacio personal donde comparto mis proyectos y habilidades como desarrollador.
 
-## Estructura del Proyecto
+## 🛠️ Stack
+- **Framework:** Astro v5
+- **Estilos:** Tailwind CSS v4
+- **Runtime:** Bun
+- **Lenguaje:** TypeScript
 
-- `src/components/`: Componentes de la interfaz.
-- `src/pages/`: Rutas y páginas del sitio.
-- `src/layouts/`: Plantillas base.
-- `src/sections/`: Secciones globales (Header, Footer).
-- `src/styles/`: Estilos globales y configuración de tema.
+## 🚀 Sobre el proyecto
+Un sitio web estático y minimalista, optimizado para ser rápido y fácil de mantener. Utiliza **Content Collections** para gestionar los proyectos mediante archivos Markdown.
 
-## Comandos
-
-| Comando | Acción |
-| :--- | :--- |
-| `bun install` | Instala las dependencias. |
-| `bun dev` | Inicia el servidor de desarrollo. |
-| `bun build` | Compila el sitio para producción. |
-| `bun preview` | Previsualiza la compilación localmente. |
+---
+[m.i](https://github.com/tu-usuario)
