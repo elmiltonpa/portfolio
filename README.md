@@ -12,4 +12,4 @@ Mi espacio personal donde comparto mis proyectos y habilidades como desarrollado
 Un sitio web estático y minimalista, optimizado para ser rápido y fácil de mantener. Utiliza **Content Collections** para gestionar los proyectos mediante archivos Markdown.
 
 ---
-[m.i](https://github.com/tu-usuario)
+[m.i](https://github.com/elmiltonpa)
