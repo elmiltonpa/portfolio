@@ -10,7 +10,10 @@ import { Icon } from "astro-icon/components";
         aria-haspopup="listbox"
     >
         <Icon name="lucide:palette" class="size-5" />
-        <Icon name="lucide:chevron-down" class="size-4 transition-transform group-data-[open]:rotate-180" />
+        <Icon
+            name="lucide:chevron-down"
+            class="size-4 transition-transform group-data-open:rotate-180"
+        />
     </button>
 
     <div
@@ -42,7 +45,7 @@ import { Icon } from "astro-icon/components";
     #theme-toggle {
         transition: transform 0.2s ease-in-out;
     }
-    
+
     #theme-toggle:active {
         transform: scale(0.9);
     }
@@ -67,11 +70,17 @@ import { Icon } from "astro-icon/components";
 
         toggle?.addEventListener("click", () => {
             menu?.classList.toggle("hidden");
-            toggle?.setAttribute("aria-expanded", menu?.classList.contains("hidden") ? "false" : "true");
+            toggle?.setAttribute(
+                "aria-expanded",
+                menu?.classList.contains("hidden") ? "false" : "true",
+            );
         });
 
         document.addEventListener("click", (e) => {
-            if (!toggle?.contains(e.target as Node) && !menu?.contains(e.target as Node)) {
+            if (
+                !toggle?.contains(e.target as Node) &&
+                !menu?.contains(e.target as Node)
+            ) {
                 menu?.classList.add("hidden");
                 toggle?.setAttribute("aria-expanded", "false");
             }
