@@ -2,15 +2,41 @@
 import { Icon } from "astro-icon/components";
 ---
 
-<button
-    id="theme-toggle"
-    class="relative p-2 rounded-lg bg-secondary/50 border border-border hover:border-primary/50 text-primary transition-all duration-300 group overflow-hidden"
-    aria-label="Toggle theme"
->
-    <div class="relative z-10 flex items-center justify-center">
+<div class="relative">
+    <button
+        id="theme-toggle"
+        class="relative p-2 rounded-lg bg-secondary/50 border border-border hover:border-primary/50 text-primary transition-all duration-300 group overflow-hidden flex items-center gap-2"
+        aria-label="Select theme"
+        aria-haspopup="listbox"
+    >
         <Icon name="lucide:palette" class="size-5" />
+        <Icon name="lucide:chevron-down" class="size-4 transition-transform group-data-[open]:rotate-180" />
+    </button>
+
+    <div
+        id="theme-menu"
+        class="absolute top-full mt-2 right-0 bg-card border border-border rounded-lg shadow-lg p-2 hidden min-w-32 z-50"
+    >
+        <button
+            class="w-full text-left px-3 py-2 rounded hover:bg-secondary transition-colors text-sm"
+            data-theme="gold"
+        >
+            Gold Dark
+        </button>
+        <button
+            class="w-full text-left px-3 py-2 rounded hover:bg-secondary transition-colors text-sm"
+            data-theme="purple"
+        >
+            Purple Dark
+        </button>
+        <button
+            class="w-full text-left px-3 py-2 rounded hover:bg-secondary transition-colors text-sm"
+            data-theme="light"
+        >
+            Light
+        </button>
     </div>
-</button>
+</div>
 
 <style>
     #theme-toggle {
@@ -31,19 +57,34 @@ import { Icon } from "astro-icon/components";
         document.documentElement.setAttribute("data-theme", theme);
         localStorage.setItem("theme", theme);
     };
+
     document.addEventListener("astro:page-load", () => {
         const currentTheme = getTheme();
         setTheme(currentTheme);
 
-        document
-            .getElementById("theme-toggle")
-            ?.addEventListener("click", () => {
-                const newTheme =
-                    document.documentElement.getAttribute("data-theme") ===
-                    "purple"
-                        ? "gold"
-                        : "purple";
+        const toggle = document.getElementById("theme-toggle");
+        const menu = document.getElementById("theme-menu");
+
+        toggle?.addEventListener("click", () => {
+            menu?.classList.toggle("hidden");
+            toggle?.setAttribute("aria-expanded", menu?.classList.contains("hidden") ? "false" : "true");
+        });
+
+        document.addEventListener("click", (e) => {
+            if (!toggle?.contains(e.target as Node) && !menu?.contains(e.target as Node)) {
+                menu?.classList.add("hidden");
+                toggle?.setAttribute("aria-expanded", "false");
+            }
+        });
+
+        menu?.addEventListener("click", (e) => {
+            const target = e.target as HTMLElement;
+            if (target.hasAttribute("data-theme")) {
+                const newTheme = target.getAttribute("data-theme")!;
                 setTheme(newTheme);
-            });
+                menu?.classList.add("hidden");
+                toggle?.setAttribute("aria-expanded", "false");
+            }
+        });
     });
 </script>
