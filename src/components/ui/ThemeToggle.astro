@@ -18,24 +18,27 @@ import { Icon } from "astro-icon/components";
 
     <div
         id="theme-menu"
-        class="absolute top-full mt-2 right-0 bg-card border border-border rounded-lg shadow-lg p-2 hidden min-w-32 z-50"
+        class="absolute top-full mt-2 right-0 bg-card border border-border rounded-lg shadow-lg p-1 hidden min-w-36 z-50"
     >
         <button
-            class="w-full text-left px-3 py-2 rounded hover:bg-secondary transition-colors text-sm"
+            class="w-full text-left px-3 py-2 rounded flex items-center gap-2 hover:bg-secondary transition-colors text-sm"
             data-theme="gold"
         >
+            <Icon name="lucide:star" class="size-4" />
             Gold Dark
         </button>
         <button
-            class="w-full text-left px-3 py-2 rounded hover:bg-secondary transition-colors text-sm"
+            class="w-full text-left px-3 py-2 rounded flex items-center gap-2 hover:bg-secondary transition-colors text-sm"
             data-theme="purple"
         >
+            <Icon name="lucide:gem" class="size-4" />
             Purple Dark
         </button>
         <button
-            class="w-full text-left px-3 py-2 rounded hover:bg-secondary transition-colors text-sm"
+            class="w-full text-left px-3 py-2 rounded flex items-center gap-2 hover:bg-secondary transition-colors text-sm"
             data-theme="light"
         >
+            <Icon name="lucide:sun" class="size-4" />
             Light
         </button>
     </div>
