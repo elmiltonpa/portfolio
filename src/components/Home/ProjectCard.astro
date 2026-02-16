@@ -45,7 +45,7 @@ const modalId = `modal-${title.replace(/\s+/g, "-").toLowerCase()}`;
                             href={github}
                             target="_blank"
                             rel="noopener noreferrer"
-                            class="p-3 rounded-full bg-background/80 text-foreground hover:bg-primary hover:text-white transition-all transform translate-y-4 group-hover:translate-y-0 duration-300 shadow-xl"
+                            class="p-3 rounded-full bg-background/80 text-foreground hover:bg-primary hover:text-primary-foreground transition-all transform translate-y-4 group-hover:translate-y-0 duration-300 shadow-xl"
                             aria-label="View code on GitHub"
                             title="View Code"
                         >
@@ -57,7 +57,7 @@ const modalId = `modal-${title.replace(/\s+/g, "-").toLowerCase()}`;
                             href={link}
                             target="_blank"
                             rel="noopener noreferrer"
-                            class="p-3 rounded-full bg-background/80 text-foreground hover:bg-primary hover:text-white transition-all transform translate-y-4 group-hover:translate-y-0 duration-300 delay-75 shadow-xl"
+                            class="p-3 rounded-full bg-background/80 text-foreground hover:bg-primary hover:text-primary-foreground transition-all transform translate-y-4 group-hover:translate-y-0 duration-300 delay-75 shadow-xl"
                             aria-label="View live demo"
                             title="View Demo"
                         >
@@ -148,7 +148,7 @@ const modalId = `modal-${title.replace(/\s+/g, "-").toLowerCase()}`;
                         href={github}
                         target="_blank"
                         rel="noopener noreferrer"
-                        class="flex-1 flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-secondary text-foreground hover:bg-primary hover:text-white transition-all duration-300 border border-border"
+                        class="flex-1 flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-secondary text-foreground hover:bg-primary hover:text-primary-foreground transition-all duration-300 border border-border"
                     >
                         <Icon name="lucide:github" class="size-5" />
                         <span class="font-mono text-sm">Code</span>
@@ -161,7 +161,7 @@ const modalId = `modal-${title.replace(/\s+/g, "-").toLowerCase()}`;
                         href={link}
                         target="_blank"
                         rel="noopener noreferrer"
-                        class="flex-1 flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-primary text-white hover:opacity-90 transition-all duration-300 shadow-lg shadow-primary/20"
+                        class="flex-1 flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground hover:opacity-90 transition-all duration-300 shadow-lg shadow-primary/20"
                     >
                         <Icon name="lucide:external-link" class="size-5" />
                         <span class="font-mono text-sm">Live Demo</span>
@@ -216,9 +216,9 @@ const modalId = `modal-${title.replace(/\s+/g, "-").toLowerCase()}`;
         background: linear-gradient(
             90deg,
             transparent,
-            rgba(128, 90, 213, 0.1) 20%,
-            rgba(128, 90, 213, 0.8) 50%,
-            rgba(128, 90, 213, 0.1) 80%,
+            rgba(var(--primary-rgb), 0.1) 20%,
+            rgba(var(--primary-rgb), 0.8) 50%,
+            rgba(var(--primary-rgb), 0.1) 80%,
             transparent
         );
         background-size: 200% 100%;

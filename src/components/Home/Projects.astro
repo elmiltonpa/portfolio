@@ -14,19 +14,6 @@ const projects = (await getCollection("projects")).sort((a, b) => {
     id="projects"
     class="relative bg-background overflow-hidden border-t border-border"
 >
-    <div
-        class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full max-w-7xl pointer-events-none"
-    >
-        <div
-            class="absolute top-1/4 -left-20 w-80 h-80 bg-primary/5 rounded-full blur-[120px]"
-        >
-        </div>
-        <div
-            class="absolute bottom-1/4 -right-20 w-80 h-80 bg-accent/5 rounded-full blur-[120px]"
-        >
-        </div>
-    </div>
-
     <div class="section-container relative z-10">
         <h2 class="section-title text-foreground">Projects</h2>
 

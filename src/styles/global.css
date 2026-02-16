@@ -1,22 +1,67 @@
 @import "tailwindcss";
 
 @theme {
-    --color-background: #09090b;
-    --color-foreground: #f2f2f2;
-    --color-card: #111114;
-    --color-card-foreground: #f2f2f2;
-    --color-popover: #111114;
-    --color-primary: #805ad5;
-    --color-primary-foreground: #ffffff;
-    --color-secondary: #1c1c21;
-    --color-secondary-foreground: #a1a1aa;
-    --color-muted: #222228;
-    --color-muted-foreground: #a1a1aa;
-    --color-accent: #805ad5;
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+    --color-card: var(--card);
+    --color-card-foreground: var(--card-foreground);
+    --color-popover: var(--popover);
+    --color-primary: var(--primary);
+    --color-primary-foreground: var(--primary-foreground);
+    --color-secondary: var(--secondary);
+    --color-secondary-foreground: var(--secondary-foreground);
+    --color-muted: var(--muted);
+    --color-muted-foreground: var(--muted-foreground);
+    --color-accent: var(--accent);
+    --color-accent-foreground: var(--accent-foreground);
     --color-destructive: #ef4444;
-    --color-border: #2a2a31;
-    --color-input: #2a2a31;
-    --color-ring: #805ad5;
+    --color-border: var(--border);
+    --color-input: var(--input);
+    --color-ring: var(--primary);
+
+    --glow-primary: var(--primary-hsl);
+}
+
+:root {
+    /* Noir Moderno (Gold) - Default */
+    --background: #0A0A0A;
+    --foreground: #FFFFFF;
+    --card: #262626;
+    --card-foreground: #FFFFFF;
+    --popover: #262626;
+    --primary: #D4AF37;
+    --primary-foreground: #0A0A0A;
+    --secondary: #262626;
+    --secondary-foreground: #FFFFFF;
+    --muted: #262626;
+    --muted-foreground: #a1a1aa;
+    --accent: #F1D592;
+    --accent-foreground: #0A0A0A;
+    --border: #262626;
+    --input: #262626;
+    --primary-hsl: 46 65% 52%;
+    --primary-rgb: 212, 175, 55;
+}
+
+[data-theme="purple"] {
+    /* Cyber (Purple) */
+    --background: #09090b;
+    --foreground: #f2f2f2;
+    --card: #111114;
+    --card-foreground: #f2f2f2;
+    --popover: #111114;
+    --primary: #805ad5;
+    --primary-foreground: #ffffff;
+    --secondary: #1c1c21;
+    --secondary-foreground: #a1a1aa;
+    --muted: #222228;
+    --muted-foreground: #a1a1aa;
+    --accent: #9f7aea;
+    --accent-foreground: #09090b;
+    --border: #2a2a31;
+    --input: #2a2a31;
+    --primary-hsl: 258 59% 59%;
+    --primary-rgb: 128, 90, 213;
 }
 
 @layer base {
