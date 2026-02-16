@@ -12,6 +12,10 @@ import { ClientRouter } from "astro:transitions";
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <meta name="generator" content={Astro.generator} />
         <title>Milton Ibarra</title>
+        <script is:inline>
+            const theme = localStorage.getItem("theme") || "gold";
+            document.documentElement.setAttribute("data-theme", theme);
+        </script>
         <ClientRouter />
     </head>
     <body id="top" class="min-h-screen flex flex-col">
