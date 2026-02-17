@@ -136,13 +136,22 @@ import Button from "../ui/Button.astro";
                             Send message
                         </Button>
                     </div>
-                    <p
+
+                    <!-- Notification Area -->
+                    <div
                         id="form-status"
-                        role="status"
-                        aria-live="polite"
-                        class="mt-4 text-center text-sm hidden"
+                        class="hidden transition-all duration-300 ease-out transform translate-y-2 opacity-0 mt-6"
                     >
-                    </p>
+                        <div
+                            class="p-4 rounded-xl border backdrop-blur-sm bg-card/50 text-center"
+                        >
+                            <p
+                                id="status-text"
+                                class="text-sm font-medium text-foreground"
+                            >
+                            </p>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>
@@ -171,16 +180,52 @@ import Button from "../ui/Button.astro";
     const submitBtn = document.getElementById("submit-button");
 
     if (contactForm && formStatus) {
+        const statusText = document.getElementById("status-text");
+
+        const showStatus = (
+            message: string,
+            type: "sending" | "success" | "error",
+        ) => {
+            if (!statusText || !formStatus) return;
+
+            formStatus.classList.remove("hidden", "translate-y-2", "opacity-0");
+            statusText.classList.remove(
+                "text-primary",
+                "text-destructive",
+                "animate-pulse",
+            );
+
+            statusText.textContent = message;
+
+            if (type === "sending") {
+                statusText.classList.add("text-primary", "animate-pulse");
+                formStatus.style.borderColor = "var(--primary)";
+            } else if (type === "success") {
+                statusText.classList.add("text-primary");
+                formStatus.style.borderColor = "var(--primary)";
+            } else if (type === "error") {
+                statusText.style.color = "#ef4444";
+                formStatus.style.borderColor = "#ef4444";
+            }
+
+            requestAnimationFrame(() => {
+                formStatus.classList.add("translate-y-0", "opacity-100");
+            });
+        };
+
+        const hideStatus = () => {
+            if (!formStatus) return;
+            formStatus.classList.remove("translate-y-0", "opacity-100");
+            formStatus.classList.add("translate-y-2", "opacity-0");
+            setTimeout(() => {
+                formStatus.classList.add("hidden");
+            }, 300);
+        };
+
         contactForm.addEventListener("submit", async (e) => {
             e.preventDefault();
 
-            formStatus.textContent = "Sending...";
-            formStatus.classList.remove(
-                "hidden",
-                "text-red-500",
-                "text-green-500",
-            );
-            formStatus.classList.add("text-foreground", "animate-pulse");
+            showStatus("Sending...", "sending");
 
             if (submitBtn instanceof HTMLButtonElement) {
                 submitBtn.disabled = true;
@@ -188,17 +233,26 @@ import Button from "../ui/Button.astro";
 
             const formData = new FormData(contactForm as HTMLFormElement);
 
+            const name = formData.get("name") as string;
+            const subject = formData.get("subject") as string;
+            const message = formData.get("message") as string;
             const email = formData.get("email") as string;
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+            if (
+                !name.trim() ||
+                !subject.trim() ||
+                !message.trim() ||
+                !email.trim()
+            ) {
+                showStatus("Please fill in all fields.", "error");
+                if (submitBtn instanceof HTMLButtonElement)
+                    submitBtn.disabled = false;
+                return;
+            }
+
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailRegex.test(email)) {
-                formStatus.textContent = "Please enter a valid email address.";
-                formStatus.classList.remove(
-                    "hidden",
-                    "animate-pulse",
-                    "text-foreground",
-                );
-                formStatus.classList.add("text-destructive");
+                showStatus("Please enter a valid email address.", "error");
                 if (submitBtn instanceof HTMLButtonElement)
                     submitBtn.disabled = false;
                 return;
@@ -217,43 +271,23 @@ import Button from "../ui/Button.astro";
                 );
 
                 if (response.ok) {
-                    formStatus.textContent =
-                        "Thanks! Message sent successfully";
-                    formStatus.classList.remove(
-                        "animate-pulse",
-                        "text-foreground",
-                    );
-                    formStatus.classList.add("text-primary");
+                    showStatus("Thanks! Message sent successfully", "success");
                     (contactForm as HTMLFormElement).reset();
                 } else {
                     const data = await response.json();
-                    if (Object.hasOwn(data, "errors")) {
-                        formStatus.textContent = data["errors"]
-                            .map((error: any) => error.message)
-                            .join(", ");
-                    } else {
-                        formStatus.textContent =
-                            "Oops! There was a problem submitting your form";
-                    }
+                    const errMsg = data.errors
+                        ? data.errors.map((e: any) => e.message).join(", ")
+                        : "Error submitting form";
+                    showStatus(errMsg, "error");
                     throw new Error();
                 }
             } catch (err) {
-                formStatus.classList.remove("animate-pulse", "text-foreground");
-                formStatus.classList.add("text-destructive");
-                if (
-                    !formStatus.textContent ||
-                    formStatus.textContent === "Sending..."
-                ) {
-                    formStatus.textContent =
-                        "Oops! There was a problem sending your message.";
-                }
+                showStatus("Oops! Problem sending message.", "error");
             } finally {
                 if (submitBtn instanceof HTMLButtonElement) {
                     submitBtn.disabled = false;
                 }
-                setTimeout(() => {
-                    formStatus.classList.add("hidden");
-                }, 5000);
+                setTimeout(hideStatus, 5000);
             }
         });
     }
