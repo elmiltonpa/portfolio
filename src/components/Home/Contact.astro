@@ -1,9 +1,5 @@
 ---
 import Button from "../ui/Button.astro";
-
-if (Astro.request.method === "POST") {
-    // Lógica para procesar el formulario
-}
 ---
 
 <section id="contact" class="bg-bg-transparent border-t border-border">
@@ -37,10 +33,18 @@ if (Astro.request.method === "POST") {
 
             <div class="lg:col-span-2">
                 <form
+                    id="contact-form"
                     method="POST"
                     class="bg-background/70 border border-border/60 shadow-xl rounded-2xl p-10 space-y-6 text-left"
                 >
                     <div class="grid sm:grid-cols-2 gap-5">
+                        <!-- Honeypot field -->
+                        <input
+                            type="text"
+                            name="_gotcha"
+                            style="display:none"
+                        />
+
                         <div class="relative group">
                             <input
                                 type="text"
@@ -123,6 +127,7 @@ if (Astro.request.method === "POST") {
 
                     <div class="flex justify-end">
                         <Button
+                            id="submit-button"
                             type="submit"
                             size="lg"
                             icon="lucide:send"
@@ -131,6 +136,13 @@ if (Astro.request.method === "POST") {
                             Send message
                         </Button>
                     </div>
+                    <p
+                        id="form-status"
+                        role="status"
+                        aria-live="polite"
+                        class="mt-4 text-center text-sm hidden"
+                    >
+                    </p>
                 </form>
             </div>
         </div>
@@ -152,5 +164,97 @@ if (Astro.request.method === "POST") {
         const email = `${u}@${d}`;
         emailLink.setAttribute("href", `mailto:${email}`);
         emailLink.textContent = email;
+    }
+
+    const contactForm = document.getElementById("contact-form");
+    const formStatus = document.getElementById("form-status");
+    const submitBtn = document.getElementById("submit-button");
+
+    if (contactForm && formStatus) {
+        contactForm.addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            formStatus.textContent = "Sending...";
+            formStatus.classList.remove(
+                "hidden",
+                "text-red-500",
+                "text-green-500",
+            );
+            formStatus.classList.add("text-foreground", "animate-pulse");
+
+            if (submitBtn instanceof HTMLButtonElement) {
+                submitBtn.disabled = true;
+            }
+
+            const formData = new FormData(contactForm as HTMLFormElement);
+
+            const email = formData.get("email") as string;
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (!emailRegex.test(email)) {
+                formStatus.textContent = "Please enter a valid email address.";
+                formStatus.classList.remove(
+                    "hidden",
+                    "animate-pulse",
+                    "text-foreground",
+                );
+                formStatus.classList.add("text-destructive");
+                if (submitBtn instanceof HTMLButtonElement)
+                    submitBtn.disabled = false;
+                return;
+            }
+
+            try {
+                const response = await fetch(
+                    "https://formspree.io/f/xwvnbrod",
+                    {
+                        method: "POST",
+                        body: formData,
+                        headers: {
+                            Accept: "application/json",
+                        },
+                    },
+                );
+
+                if (response.ok) {
+                    formStatus.textContent =
+                        "Thanks! Message sent successfully";
+                    formStatus.classList.remove(
+                        "animate-pulse",
+                        "text-foreground",
+                    );
+                    formStatus.classList.add("text-primary");
+                    (contactForm as HTMLFormElement).reset();
+                } else {
+                    const data = await response.json();
+                    if (Object.hasOwn(data, "errors")) {
+                        formStatus.textContent = data["errors"]
+                            .map((error: any) => error.message)
+                            .join(", ");
+                    } else {
+                        formStatus.textContent =
+                            "Oops! There was a problem submitting your form";
+                    }
+                    throw new Error();
+                }
+            } catch (err) {
+                formStatus.classList.remove("animate-pulse", "text-foreground");
+                formStatus.classList.add("text-destructive");
+                if (
+                    !formStatus.textContent ||
+                    formStatus.textContent === "Sending..."
+                ) {
+                    formStatus.textContent =
+                        "Oops! There was a problem sending your message.";
+                }
+            } finally {
+                if (submitBtn instanceof HTMLButtonElement) {
+                    submitBtn.disabled = false;
+                }
+                setTimeout(() => {
+                    formStatus.classList.add("hidden");
+                }, 5000);
+            }
+        });
     }
 </script>
