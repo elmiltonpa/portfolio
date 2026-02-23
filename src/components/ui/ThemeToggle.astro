@@ -2,40 +2,37 @@
 import { Icon } from "astro-icon/components";
 ---
 
-<div class="relative">
+<div class="relative group" id="theme-wrapper" data-open="false">
     <button
         id="theme-toggle"
-        class="relative p-2 rounded-lg bg-secondary/50 border border-border hover:border-primary/50 text-primary transition-all duration-300 group overflow-hidden flex items-center gap-2"
+        class="relative p-2 rounded-lg bg-transparent text-muted-foreground hover:bg-secondary/50 hover:text-foreground group-data-[open=true]:bg-secondary/50 group-data-[open=true]:text-foreground transition-all duration-200 flex items-center justify-center active:scale-95"
         aria-label="Select theme"
         aria-haspopup="listbox"
+        aria-expanded="false"
     >
-        <Icon name="lucide:palette" class="size-5" />
-        <Icon
-            name="lucide:chevron-down"
-            class="size-4 transition-transform group-data-open:rotate-180"
-        />
+        <Icon name="lucide:moon" class="size-5" />
     </button>
 
     <div
         id="theme-menu"
-        class="absolute top-full mt-2 right-0 bg-card border border-border rounded-lg shadow-lg p-1 hidden min-w-36 z-50"
+        class="absolute top-full mt-2 right-0 bg-card border border-border rounded-lg shadow-xl p-1.5 min-w-40 z-50 flex flex-col gap-1 origin-top-right transition-all duration-200 ease-out pointer-events-none opacity-0 invisible -translate-y-2 scale-95 group-data-[open=true]:opacity-100 group-data-[open=true]:visible group-data-[open=true]:translate-y-0 group-data-[open=true]:scale-100 group-data-[open=true]:pointer-events-auto"
     >
         <button
-            class="w-full text-left px-3 py-2 rounded flex items-center gap-2 hover:bg-secondary transition-colors text-sm"
+            class="w-full text-left px-3 py-2 rounded-md flex items-center gap-2 hover:bg-secondary/80 transition-colors text-sm font-medium text-muted-foreground hover:text-foreground"
             data-theme="gold"
         >
             <Icon name="lucide:star" class="size-4" />
             Gold Dark
         </button>
         <button
-            class="w-full text-left px-3 py-2 rounded flex items-center gap-2 hover:bg-secondary transition-colors text-sm"
+            class="w-full text-left px-3 py-2 rounded-md flex items-center gap-2 hover:bg-secondary/80 transition-colors text-sm font-medium text-muted-foreground hover:text-foreground"
             data-theme="purple"
         >
             <Icon name="lucide:gem" class="size-4" />
             Purple Dark
         </button>
         <button
-            class="w-full text-left px-3 py-2 rounded flex items-center gap-2 hover:bg-secondary transition-colors text-sm"
+            class="w-full text-left px-3 py-2 rounded-md flex items-center gap-2 hover:bg-secondary/80 transition-colors text-sm font-medium text-muted-foreground hover:text-foreground"
             data-theme="light"
         >
             <Icon name="lucide:sun" class="size-4" />
@@ -43,16 +40,6 @@ import { Icon } from "astro-icon/components";
         </button>
     </div>
 </div>
-
-<style>
-    #theme-toggle {
-        transition: transform 0.2s ease-in-out;
-    }
-
-    #theme-toggle:active {
-        transform: scale(0.9);
-    }
-</style>
 
 <script>
     const getTheme = () => {
@@ -68,34 +55,33 @@ import { Icon } from "astro-icon/components";
         const currentTheme = getTheme();
         setTheme(currentTheme);
 
+        const wrapper = document.getElementById("theme-wrapper");
         const toggle = document.getElementById("theme-toggle");
         const menu = document.getElementById("theme-menu");
 
+        const closeMenu = () => {
+            wrapper?.setAttribute("data-open", "false");
+            toggle?.setAttribute("aria-expanded", "false");
+        };
+
         toggle?.addEventListener("click", () => {
-            menu?.classList.toggle("hidden");
-            toggle?.setAttribute(
-                "aria-expanded",
-                menu?.classList.contains("hidden") ? "false" : "true",
-            );
+            const isOpen = wrapper?.getAttribute("data-open") === "true";
+            wrapper?.setAttribute("data-open", String(!isOpen));
+            toggle?.setAttribute("aria-expanded", String(!isOpen));
         });
 
         document.addEventListener("click", (e) => {
-            if (
-                !toggle?.contains(e.target as Node) &&
-                !menu?.contains(e.target as Node)
-            ) {
-                menu?.classList.add("hidden");
-                toggle?.setAttribute("aria-expanded", "false");
+            if (!wrapper?.contains(e.target as Node)) {
+                closeMenu();
             }
         });
 
         menu?.addEventListener("click", (e) => {
-            const target = e.target as HTMLElement;
-            if (target.hasAttribute("data-theme")) {
+            const target = (e.target as HTMLElement).closest("[data-theme]");
+            if (target) {
                 const newTheme = target.getAttribute("data-theme")!;
                 setTheme(newTheme);
-                menu?.classList.add("hidden");
-                toggle?.setAttribute("aria-expanded", "false");
+                closeMenu();
             }
         });
     });
