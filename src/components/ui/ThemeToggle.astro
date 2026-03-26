@@ -1,88 +1,105 @@
----
-import { Icon } from "astro-icon/components";
----
-
-<div class="relative group" id="theme-wrapper" data-open="false">
-    <button
-        id="theme-toggle"
-        class="relative p-2 rounded-lg bg-transparent text-muted-foreground hover:bg-secondary/50 hover:text-foreground group-data-[open=true]:bg-secondary/50 group-data-[open=true]:text-foreground transition-all duration-200 flex items-center justify-center active:scale-95"
-        aria-label="Select theme"
-        aria-haspopup="listbox"
-        aria-expanded="false"
-    >
-        <Icon name="lucide:moon" class="size-5" />
-    </button>
-
+<button
+    id="theme-toggle"
+    class="relative p-2 w-10 h-10 border border-primary hover:bg-primary group transition-all duration-300"
+    aria-label="Toggle theme"
+>
     <div
-        id="theme-menu"
-        class="absolute top-full mt-2 right-0 bg-card border border-border rounded-lg shadow-xl p-1.5 min-w-40 z-50 flex flex-col gap-1 origin-top-right transition-all duration-200 ease-out pointer-events-none opacity-0 invisible -translate-y-2 scale-95 group-data-[open=true]:opacity-100 group-data-[open=true]:visible group-data-[open=true]:translate-y-0 group-data-[open=true]:scale-100 group-data-[open=true]:pointer-events-auto"
+        id="sun-icon"
+        class="absolute inset-0 flex items-center justify-center text-primary group-hover:text-background transition-colors hidden"
     >
-        <button
-            class="w-full text-left px-3 py-2 rounded-md flex items-center gap-2 hover:bg-secondary/80 transition-colors text-sm font-medium text-muted-foreground hover:text-foreground"
-            data-theme="gold"
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
         >
-            <Icon name="lucide:star" class="size-4" />
-            Gold Dark
-        </button>
-        <button
-            class="w-full text-left px-3 py-2 rounded-md flex items-center gap-2 hover:bg-secondary/80 transition-colors text-sm font-medium text-muted-foreground hover:text-foreground"
-            data-theme="purple"
-        >
-            <Icon name="lucide:gem" class="size-4" />
-            Purple Dark
-        </button>
-        <button
-            class="w-full text-left px-3 py-2 rounded-md flex items-center gap-2 hover:bg-secondary/80 transition-colors text-sm font-medium text-muted-foreground hover:text-foreground"
-            data-theme="light"
-        >
-            <Icon name="lucide:sun" class="size-4" />
-            Light
-        </button>
+            <circle cx="12" cy="12" r="4"></circle>
+            <path d="M12 2v2"></path>
+            <path d="M12 20v2"></path>
+            <path d="m4.93 4.93 1.41 1.41"></path>
+            <path d="m17.66 17.66 1.41 1.41"></path>
+            <path d="M2 12h2"></path>
+            <path d="M22 12h2"></path>
+            <path d="m6.34 17.66-1.41 1.41"></path>
+            <path d="m19.07 4.93-1.41 1.41"></path>
+        </svg>
     </div>
-</div>
+    <div
+        id="moon-icon"
+        class="absolute inset-0 flex items-center justify-center text-primary group-hover:text-background transition-colors"
+    >
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+        >
+            <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+        </svg>
+    </div>
+</button>
 
-<script>
-    const getTheme = () => {
-        return localStorage.getItem("theme") || "gold";
+<script is:inline>
+    const theme = (() => {
+        if (
+            typeof localStorage !== "undefined" &&
+            localStorage.getItem("theme")
+        ) {
+            return localStorage.getItem("theme");
+        }
+        if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+            return "dark";
+        }
+        return "light";
+    })();
+
+    if (theme === "light") {
+        document.documentElement.setAttribute("data-theme", "light");
+    } else {
+        document.documentElement.setAttribute("data-theme", "dark");
+    }
+
+    window.localStorage.setItem("theme", theme);
+
+    const handleToggleClick = () => {
+        const element = document.documentElement;
+        const currentTheme = element.getAttribute("data-theme");
+        const isDark = currentTheme === "dark";
+        const newTheme = isDark ? "light" : "dark";
+
+        element.setAttribute("data-theme", newTheme);
+        localStorage.setItem("theme", newTheme);
+
+        updateIcons(newTheme);
     };
 
-    const setTheme = (theme: string) => {
-        document.documentElement.setAttribute("data-theme", theme);
-        localStorage.setItem("theme", theme);
+    const updateIcons = (currentTheme) => {
+        const sunIcon = document.getElementById("sun-icon");
+        const moonIcon = document.getElementById("moon-icon");
+
+        if (currentTheme === "dark") {
+            sunIcon?.classList.remove("hidden");
+            moonIcon?.classList.add("hidden");
+        } else {
+            sunIcon?.classList.add("hidden");
+            moonIcon?.classList.remove("hidden");
+        }
     };
 
-    document.addEventListener("astro:page-load", () => {
-        const currentTheme = getTheme();
-        setTheme(currentTheme);
+    document
+        .getElementById("theme-toggle")
+        ?.addEventListener("click", handleToggleClick);
 
-        const wrapper = document.getElementById("theme-wrapper");
-        const toggle = document.getElementById("theme-toggle");
-        const menu = document.getElementById("theme-menu");
-
-        const closeMenu = () => {
-            wrapper?.setAttribute("data-open", "false");
-            toggle?.setAttribute("aria-expanded", "false");
-        };
-
-        toggle?.addEventListener("click", () => {
-            const isOpen = wrapper?.getAttribute("data-open") === "true";
-            wrapper?.setAttribute("data-open", String(!isOpen));
-            toggle?.setAttribute("aria-expanded", String(!isOpen));
-        });
-
-        document.addEventListener("click", (e) => {
-            if (!wrapper?.contains(e.target as Node)) {
-                closeMenu();
-            }
-        });
-
-        menu?.addEventListener("click", (e) => {
-            const target = (e.target as HTMLElement).closest("[data-theme]");
-            if (target) {
-                const newTheme = target.getAttribute("data-theme")!;
-                setTheme(newTheme);
-                closeMenu();
-            }
-        });
-    });
+    // Initial update
+    updateIcons(theme);
 </script>

@@ -1,141 +1,75 @@
 ---
-import { Icon } from "astro-icon/components";
-
 const skills = [
     {
-        category: "Languages",
-        icon: "lucide:code-2",
-        items: [
-            { name: "Rust", icon: "simple-icons:rust" },
-            { name: "TypeScript", icon: "simple-icons:typescript" },
-            { name: "JavaScript", icon: "simple-icons:javascript" },
-            { name: "C#", icon: "simple-icons:csharp" },
-            { name: "CSS", icon: "simple-icons:css3" },
-            { name: "HTML5", icon: "simple-icons:html5" },
-        ],
+        title: "FULLSTACK DEVELOPMENT",
+        description: "Building responsive web applications from the ground up, connecting clean user interfaces with robust logic.",
+        items: ["Frontend Development", "API Integration", "Database Design"]
     },
     {
-        category: "Frameworks & Libraries",
-        icon: "lucide:blocks",
-        items: [
-            { name: "Bun", icon: "simple-icons:bun" },
-            { name: "Astro", icon: "simple-icons:astro" },
-            { name: "Vue.js", icon: "simple-icons:vuedotjs" },
-            { name: "Axum", icon: "simple-icons:rust" },
-            { name: ".NET", icon: "simple-icons:dotnet" },
-            { name: "Express.js", icon: "lucide:code" },
-            { name: "JWT", icon: "lucide:lock" },
-            { name: "Next.js", icon: "simple-icons:nextdotjs" },
-            { name: "React", icon: "simple-icons:react" },
-            { name: "Tailwind CSS", icon: "simple-icons:tailwindcss" },
-            { name: "Vite", icon: "simple-icons:vite" },
-        ],
+        title: "MODERN UI/UX",
+        description: "Translating designs into pixel-perfect, accessible, and interactive user experiences.",
+        items: ["Responsive Layouts", "Web Animation", "CSS Architecture"]
     },
     {
-        category: "Computer Science",
-        icon: "lucide:brain",
-        items: [
-            { name: "Data Structures", icon: "lucide:list" },
-            { name: "Algorithms", icon: "lucide:cpu" },
-            { name: "Design Patterns", icon: "lucide:box" },
-            { name: "Agile Methodologies", icon: "lucide:users" },
-            { name: "System Design", icon: "lucide:workflow" },
-            { name: "Testing", icon: "lucide:check-circle" },
-        ],
-    },
-    {
-        category: "Databases",
-        icon: "lucide:database",
-        items: [
-            { name: "PostgreSQL", icon: "simple-icons:postgresql" },
-            { name: "Redis", icon: "simple-icons:redis" },
-            { name: "MongoDB", icon: "simple-icons:mongodb" },
-            { name: "SQL", icon: "lucide:database" },
-            { name: "ORMs", icon: "lucide:settings" },
-            { name: "Database Design", icon: "lucide:layers" },
-        ],
-    },
-    {
-        category: "DevOps & Tools",
-        icon: "lucide:cloud",
-        items: [
-            { name: "Docker", icon: "simple-icons:docker" },
-            { name: "Git", icon: "simple-icons:git" },
-            { name: "Postman", icon: "simple-icons:postman" },
-        ],
-    },
+        title: "STRATEGIC LAYERING",
+        description: "Consulting on the intersection of brand and build. Translating complex business goals into high-fidelity design outcomes.",
+        items: ["Creative Direction", "Product Strategy", "Design Auditing"]
+    }
 ];
 ---
 
-<section
-    id="skills"
-    class="relative bg-transparent overflow-hidden border-t border-border"
->
-    <div class="section-container relative z-10">
-        <h2 class="section-title text-foreground">Skills</h2>
-
-        <div
-            class="flex flex-wrap justify-center gap-6 max-w-6xl mx-auto skills-grid"
+<section id="skills" class="grid grid-cols-1 md:grid-cols-12 gap-16 mb-80">
+    <div class="md:col-span-3">
+        <h2
+            class="font-headline text-2xl font-black uppercase tracking-tighter sticky top-40"
         >
-            {
-                skills.map((group, i) => (
-                    <div
-                        class={`skill-card group relative bg-card/50 backdrop-blur-sm border border-border rounded-xl p-6
-                        hover:border-primary/50 transition-all duration-300 animate-fade-up stagger-${i + 1}
-                        w-full sm:w-[calc(50%-1.5rem)] lg:w-[calc(33.333%-2rem)]`}
+            02
+            <span class="block text-accent"
+                >Capabilities</span
+            >
+        </h2>
+    </div>
+    <div class="md:col-span-9">
+        <div class="space-y-32">
+            {skills.map(skill => (
+                <div class="group relative">
+                    <h3
+                        class="font-headline text-6xl md:text-8xl font-black uppercase tracking-tighter leading-none transition-all group-hover:pl-8"
                     >
-                        <div class="absolute inset-0 rounded-xl bg-linear-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-
-                        <div class="relative z-10">
-                            <div class="flex items-center gap-3 mb-5">
-                                <div class="p-2 rounded-lg bg-primary/10 text-primary group-hover:bg-primary/20 transition-colors">
-                                    <Icon name={group.icon} class="size-5" />
-                                </div>
-                                <h3 class="text-sm text-foreground tracking-wide uppercase font-mono font-semibold">
-                                    {group.category}
-                                </h3>
-                            </div>
-
-                            <div class="flex flex-wrap gap-2">
-                                {group.items.map((item) => (
-                                    <div
-                                        class="skill-item flex items-center gap-2 px-3 py-2 bg-secondary/50 rounded-lg
-                                        border border-transparent hover:border-primary/30 hover:bg-secondary
-                                        transition-all duration-200 cursor-default group/item"
-                                    >
-                                        <Icon
-                                            name={item.icon}
-                                            class="size-4 text-muted-foreground group-hover/item:text-primary transition-colors"
-                                        />
-                                        <span class="text-sm text-secondary-foreground group-hover/item:text-foreground transition-colors font-mono">
-                                            {item.name}
-                                        </span>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
+                        {skill.title}
+                    </h3>
+                    <div
+                        class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12 opacity-80"
+                    >
+                        <p class="font-body text-xl">
+                            {skill.description}
+                        </p>
+                        <ul
+                            class="font-label text-xs font-bold uppercase tracking-widest space-y-2"
+                        >
+                            {skill.items.map(item => (
+                                <li class="flex items-center gap-2">
+                                    <span
+                                        class="w-2 h-2 bg-accent"
+                                    ></span>
+                                    {item}
+                                </li>
+                            ))}
+                        </ul>
                     </div>
-                ))
-            }
+                </div>
+            ))}
+        </div>
+
+        <div class="mt-40 border-t-2 border-primary pt-16">
+            <h4 class="font-label text-xs font-black uppercase tracking-[0.2em] mb-12 text-primary/40">Core Tech Stack</h4>
+            <div class="flex flex-wrap gap-4">
+                {["TypeScript", "React", "Next.js", "Astro", "Node.js", "Rust", "PostgreSQL", "Redis", "Docker", "Git"].map(tech => (
+                    <span class="font-headline text-3xl md:text-5xl font-black uppercase tracking-tighter border-2 border-primary/10 px-6 py-4 hover:bg-accent hover:text-white hover:border-accent transition-all duration-300 cursor-default">
+                        {tech}
+                    </span>
+                ))}
+            </div>
         </div>
     </div>
 </section>
-
-<style>
-    .skill-card {
-        transform: translateY(0);
-    }
-
-    .skill-card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 20px 40px -20px rgba(var(--primary-rgb), 0.15);
-    }
-
-    @media (min-width: 1024px) {
-        .skills-grid > :nth-child(4),
-        .skills-grid > :nth-child(5) {
-            grid-column: 2;
-            justify-self: center;
-        }
-    }
-</style>

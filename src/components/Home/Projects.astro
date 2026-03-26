@@ -1,66 +1,76 @@
 ---
-import ProjectCard from "./ProjectCard.astro";
 import { getCollection } from "astro:content";
-import Button from "../ui/Button.astro";
 
-const projects = (await getCollection("projects")).sort((a, b) => {
-    const orderA = a.data.order ?? Infinity;
-    const orderB = b.data.order ?? Infinity;
-    return orderA - orderB;
-});
+const projects = await getCollection("projects");
+const sortedProjects = projects.sort((a, b) => (a.data.order || 0) - (b.data.order || 0));
 ---
 
-<section
-    id="projects"
-    class="relative bg-background overflow-hidden border-t border-border"
->
-    <div class="section-container relative z-10">
-        <h2 class="section-title text-foreground">Projects</h2>
-
-        <p
-            class="text-muted-foreground text-center max-w-2xl mx-auto -mt-8 mb-16"
+<section id="projects" class="grid grid-cols-1 md:grid-cols-12 gap-16 mb-80">
+    <div class="md:col-span-3">
+        <h2
+            class="font-headline text-2xl font-black uppercase tracking-tighter sticky top-40"
         >
-            A selection of my most recent works, focused on
-            backend architecture, scalability and smooth user experiences.
-        </p>
-
-        <div class="grid md:grid-cols-2 gap-8 lg:gap-10">
-            {
-                projects.map((project) => {
-                    const {
-                        title,
-                        description,
-                        tags,
-                        github,
-                        link,
-                        image,
-                        featured,
-                    } = project.data;
-                    return (
-                        <ProjectCard
-                            title={title}
-                            description={description}
-                            tags={tags || []}
-                            github={github}
-                            link={link}
-                            featured={featured}
-                            image={image}
-                        />
-                    );
-                })
-            }
+            01
+            <span class="block text-accent">Projects</span>
+        </h2>
+    </div>
+    
+    <div class="md:col-span-9">
+        <div class="border-t-2 border-primary">
+            {sortedProjects.map((project, index) => (
+                <a 
+                    href={project.data.github || "#"} 
+                    target="_blank" 
+                    class="group block border-b border-primary/20 py-8 hover:bg-accent hover:text-white transition-all duration-300 px-4 -mx-4"
+                >
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+                        <div class="md:col-span-5">
+                            <h3 class="font-headline text-3xl md:text-4xl font-black uppercase tracking-tighter leading-none">
+                                {project.data.title}
+                            </h3>
+                        </div>
+                        
+                        <div class="md:col-span-6 flex flex-col gap-3">
+                            <p class="font-label text-[10px] uppercase tracking-[0.1em] font-bold opacity-60 group-hover:opacity-100 transition-opacity truncate">
+                                {project.data.description}
+                            </p>
+                            <div class="flex flex-wrap gap-x-4 gap-y-1">
+                                {project.data.tags?.map(tag => (
+                                    <span class="font-label text-[9px] font-black uppercase tracking-widest text-primary/40 group-hover:text-white/60 transition-colors">
+                                        [{tag}]
+                                    </span>
+                                ))}
+                            </div>
+                        </div>
+                        
+                        <div class="md:col-span-1 flex justify-end">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" class="transition-transform group-hover:translate-x-2">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </div>
+                    </div>
+                </a>
+            ))}
         </div>
-
-        <div class="mt-20 flex justify-center">
-            <Button
-                href="https://github.com/elmiltonpa"
-                target="_blank"
-                variant="outline"
-                class="group px-8"
-                icon="lucide:github"
+        
+        <div class="mt-16 flex flex-col items-center gap-6">
+            <a 
+                href="https://github.com/miltonibarra" 
+                target="_blank" 
+                class="group flex flex-col items-center gap-3"
             >
-                View more on GitHub
-            </Button>
+                <div class="px-8 py-3 border border-primary group-hover:border-accent group-hover:bg-accent text-primary group-hover:text-white transition-all duration-300 flex items-center gap-4">
+                    <span class="font-headline text-sm font-black uppercase tracking-widest">View all on GitHub</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" class="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1">
+                        <line x1="7" y1="17" x2="17" y2="7"></line>
+                        <polyline points="7 7 17 7 17 17"></polyline>
+                    </svg>
+                </div>
+                <span class="font-label text-[8px] font-black uppercase tracking-[0.4em] text-primary/30 group-hover:text-accent transition-colors">
+                    Full Repository Access
+                </span>
+            </a>
         </div>
     </div>
 </section>

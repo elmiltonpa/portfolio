@@ -1,294 +1,147 @@
 ---
-import Button from "../ui/Button.astro";
+
 ---
 
-<section id="contact" class="bg-bg-transparent border-t border-border">
-    <div class="section-container">
-        <h2 class="section-title text-foreground">Contact</h2>
-
-        <div class="grid lg:grid-cols-3 gap-16 items-start">
-            <div class="lg:col-span-1 space-y-8">
-                <p
-                    class="text-2xl md:text-3xl font-bold text-foreground leading-tight"
+<section id="contact" class="grid grid-cols-1 md:grid-cols-12 gap-16 mb-80">
+  <div class="md:col-span-3">
+    <h2
+      class="font-headline text-2xl font-black uppercase tracking-tighter sticky top-40"
+    >
+      04
+      <span class="block text-accent">Connect</span>
+    </h2>
+  </div>
+  <div class="md:col-span-9">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-12">
+      <div class="md:col-span-5">
+        <p class="font-body text-3xl leading-tight text-primary mb-12">
+          Do you have an idea in mind? <span class="italic text-accent"
+            >Let's talk.</span
+          >
+        </p>
+        <div class="space-y-12">
+          <div class="border-t border-primary/10 pt-8">
+            <span
+              class="font-label text-xs font-black text-accent mb-4 block uppercase tracking-widest"
+              >Direct Channel</span
+            >
+            <a
+              href="mailto:elmiltonibarra@gmail.com"
+              class="font-headline text-2xl font-black uppercase tracking-tighter hover:text-accent transition-colors"
+            >
+              elmiltonibarra@gmail.com
+            </a>
+          </div>
+          <div class="border-t border-primary/10 pt-8">
+            <span
+              class="font-label text-xs font-black text-accent mb-4 block uppercase tracking-widest"
+              >Social Structures</span
+            >
+            <div class="flex flex-col gap-4">
+              <a
+                href="https://www.linkedin.com/in/milton-ibarra-ba1020205/"
+                target="_blank"
+                class="font-headline text-xl font-bold uppercase tracking-tighter hover:text-accent transition-colors flex items-center gap-4 group"
+              >
+                LinkedIn
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1"
                 >
-                    Do you have an idea in mind? <span
-                        class="text-primary whitespace-nowrap">Let's talk.</span
-                    >
-                </p>
-
-                <div class="space-y-4">
-                    <p
-                        class="text-sm font-mono text-muted-foreground uppercase tracking-widest"
-                    >
-                        Direct contact
-                    </p>
-                    <a
-                        id="email-contact"
-                        href="#"
-                        class="text-lg md:text-xl text-foreground font-mono hover:text-primary transition-colors block underline decoration-primary/30 underline-offset-8"
-                    >
-                    </a>
-                </div>
-            </div>
-
-            <div class="lg:col-span-2">
-                <form
-                    id="contact-form"
-                    method="POST"
-                    class="bg-background/70 border border-border/60 shadow-xl rounded-2xl p-10 space-y-6 text-left"
+                  <line x1="7" y1="17" x2="17" y2="7"></line>
+                  <polyline points="7 7 17 7 17 17"></polyline>
+                </svg>
+              </a>
+              <a
+                href="https://github.com/elmiltonpa"
+                target="_blank"
+                class="font-headline text-xl font-bold uppercase tracking-tighter hover:text-accent transition-colors flex items-center gap-4 group"
+              >
+                GitHub
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1"
                 >
-                    <div class="grid sm:grid-cols-2 gap-5">
-                        <!-- Honeypot field -->
-                        <input
-                            type="text"
-                            name="_gotcha"
-                            style="display:none"
-                        />
-
-                        <div class="relative group">
-                            <input
-                                type="text"
-                                id="name"
-                                name="name"
-                                placeholder=" "
-                                required
-                                autocomplete="off"
-                                class="peer w-full px-4 pt-6 pb-2 rounded-xl border border-border bg-card text-foreground focus:border-primary focus:ring-2 focus:ring-primary/20 hover:border-primary/40 outline-none transition-all"
-                            />
-                            <label
-                                for="name"
-                                class="absolute left-4 top-4 text-muted-foreground/70 transition-all duration-200 pointer-events-none
-                                peer-focus:-translate-y-3 peer-focus:text-xs peer-focus:text-primary
-                                peer-[:not(:placeholder-shown)]:-translate-y-3 peer-[:not(:placeholder-shown)]:text-xs"
-                            >
-                                Name
-                            </label>
-                        </div>
-
-                        <div class="relative group">
-                            <input
-                                type="email"
-                                id="email"
-                                name="email"
-                                placeholder=" "
-                                required
-                                autocomplete="email"
-                                class="peer w-full px-4 pt-6 pb-2 rounded-xl border border-border bg-card text-foreground focus:border-primary focus:ring-2 focus:ring-primary/20 hover:border-primary/40 outline-none transition-all"
-                            />
-                            <label
-                                for="email"
-                                class="absolute left-4 top-4 text-muted-foreground/70 transition-all duration-200 pointer-events-none
-                                        peer-focus:-translate-y-3 peer-focus:text-xs peer-focus:text-primary
-                                        peer-[:not(:placeholder-shown)]:-translate-y-3 peer-[:not(:placeholder-shown)]:text-xs"
-                            >
-                                Email
-                            </label>
-                        </div>
-                    </div>
-
-                    <div class="relative group">
-                        <input
-                            type="text"
-                            id="subject"
-                            name="subject"
-                            placeholder=" "
-                            required
-                            autocomplete="off"
-                            class="peer w-full px-4 pt-6 pb-2 rounded-xl border border-border bg-card text-foreground focus:border-primary focus:ring-2 focus:ring-primary/20 hover:border-primary/40 outline-none transition-all"
-                        />
-                        <label
-                            for="subject"
-                            class="absolute left-4 top-4 text-muted-foreground/70 transition-all duration-200 pointer-events-none
-                            peer-focus:-translate-y-3 peer-focus:text-xs peer-focus:text-primary
-                            peer-[:not(:placeholder-shown)]:-translate-y-3 peer-[:not(:placeholder-shown)]:text-xs"
-                        >
-                            Subject
-                        </label>
-                    </div>
-
-                    <div class="relative group">
-                        <textarea
-                            id="message"
-                            name="message"
-                            rows="5"
-                            placeholder=" "
-                            required
-                            class="peer w-full px-4 pt-8 pb-2 rounded-xl border border-border bg-card text-foreground focus:border-primary focus:ring-2 focus:ring-primary/20 hover:border-primary/40 outline-none transition-all resize-none"
-                        ></textarea>
-                        <label
-                            for="message"
-                            class="absolute left-4 top-5 text-muted-foreground/70 transition-all duration-200 pointer-events-none
-                            peer-focus:-translate-y-3 peer-focus:text-xs peer-focus:text-primary
-                            peer-[:not(:placeholder-shown)]:-translate-y-3 peer-[:not(:placeholder-shown)]:text-xs"
-                        >
-                            Your message...
-                        </label>
-                    </div>
-
-                    <div class="flex justify-end">
-                        <Button
-                            id="submit-button"
-                            type="submit"
-                            size="lg"
-                            icon="lucide:send"
-                            class="font-mono px-10"
-                        >
-                            Send message
-                        </Button>
-                    </div>
-
-                    <!-- Notification Area -->
-                    <div
-                        id="form-status"
-                        class="hidden transition-all duration-300 ease-out transform translate-y-2 opacity-0 mt-6"
-                    >
-                        <div
-                            class="p-4 rounded-xl border backdrop-blur-sm bg-card/50 text-center"
-                        >
-                            <p
-                                id="status-text"
-                                class="text-sm font-medium text-foreground"
-                            >
-                            </p>
-                        </div>
-                    </div>
-                </form>
+                  <line x1="7" y1="17" x2="17" y2="7"></line>
+                  <polyline points="7 7 17 7 17 17"></polyline>
+                </svg>
+              </a>
             </div>
+          </div>
         </div>
+      </div>
+      <div class="md:col-span-7">
+        <form
+          action="https://formspree.io/f/your-id"
+          method="POST"
+          class="space-y-12 bg-border/20 p-8 md:p-12 border border-primary/5"
+        >
+          <div class="space-y-2">
+            <label
+              for="name"
+              class="font-label text-[10px] font-black uppercase tracking-[0.2em] text-primary/40"
+              >Full Name</label
+            >
+            <input
+              type="text"
+              name="name"
+              id="name"
+              required
+              class="w-full bg-transparent border-b-2 border-primary/10 focus:border-accent outline-none py-4 font-body text-2xl transition-colors"
+            />
+          </div>
+          <div class="space-y-2">
+            <label
+              for="email"
+              class="font-label text-[10px] font-black uppercase tracking-[0.2em] text-primary/40"
+              >Email Address</label
+            >
+            <input
+              type="email"
+              name="email"
+              id="email"
+              required
+              class="w-full bg-transparent border-b-2 border-primary/10 focus:border-accent outline-none py-4 font-body text-2xl transition-colors"
+            />
+          </div>
+          <div class="space-y-2">
+            <label
+              for="message"
+              class="font-label text-[10px] font-black uppercase tracking-[0.2em] text-primary/40"
+              >Project Brief</label
+            >
+            <textarea
+              name="message"
+              id="message"
+              rows="4"
+              required
+              class="w-full bg-transparent border-b-2 border-primary/10 focus:border-accent outline-none py-4 font-body text-2xl transition-colors resize-none"
+            ></textarea>
+          </div>
+          <button
+            type="submit"
+            class="w-full bg-primary text-background font-headline text-xl font-black uppercase tracking-tighter py-6 hover:bg-accent transition-all duration-300"
+          >
+            Submit Requirement
+          </button>
+        </form>
+      </div>
     </div>
+  </div>
 </section>
-
-<style>
-    input:-webkit-autofill {
-        -webkit-box-shadow: 0 0 0px 1000px var(--card) inset !important;
-        -webkit-text-fill-color: var(--foreground) !important;
-    }
-</style>
-
-<script>
-    const emailLink = document.getElementById("email-contact");
-    if (emailLink) {
-        const u = "elmiltonibarra";
-        const d = "gmail.com";
-        const email = `${u}@${d}`;
-        emailLink.setAttribute("href", `mailto:${email}`);
-        emailLink.textContent = email;
-    }
-
-    const contactForm = document.getElementById("contact-form");
-    const formStatus = document.getElementById("form-status");
-    const submitBtn = document.getElementById("submit-button");
-
-    if (contactForm && formStatus) {
-        const statusText = document.getElementById("status-text");
-
-        const showStatus = (
-            message: string,
-            type: "sending" | "success" | "error",
-        ) => {
-            if (!statusText || !formStatus) return;
-
-            formStatus.classList.remove("hidden", "translate-y-2", "opacity-0");
-            statusText.classList.remove(
-                "text-primary",
-                "text-destructive",
-                "animate-pulse",
-            );
-
-            statusText.textContent = message;
-
-            if (type === "sending") {
-                statusText.classList.add("text-primary", "animate-pulse");
-                formStatus.style.borderColor = "var(--primary)";
-            } else if (type === "success") {
-                statusText.classList.add("text-primary");
-                formStatus.style.borderColor = "var(--primary)";
-            } else if (type === "error") {
-                statusText.style.color = "#ef4444";
-                formStatus.style.borderColor = "#ef4444";
-            }
-
-            requestAnimationFrame(() => {
-                formStatus.classList.add("translate-y-0", "opacity-100");
-            });
-        };
-
-        const hideStatus = () => {
-            if (!formStatus) return;
-            formStatus.classList.remove("translate-y-0", "opacity-100");
-            formStatus.classList.add("translate-y-2", "opacity-0");
-            setTimeout(() => {
-                formStatus.classList.add("hidden");
-            }, 300);
-        };
-
-        contactForm.addEventListener("submit", async (e) => {
-            e.preventDefault();
-
-            showStatus("Sending...", "sending");
-
-            if (submitBtn instanceof HTMLButtonElement) {
-                submitBtn.disabled = true;
-            }
-
-            const formData = new FormData(contactForm as HTMLFormElement);
-
-            const name = formData.get("name") as string;
-            const subject = formData.get("subject") as string;
-            const message = formData.get("message") as string;
-            const email = formData.get("email") as string;
-
-            if (
-                !name.trim() ||
-                !subject.trim() ||
-                !message.trim() ||
-                !email.trim()
-            ) {
-                showStatus("Please fill in all fields.", "error");
-                if (submitBtn instanceof HTMLButtonElement)
-                    submitBtn.disabled = false;
-                return;
-            }
-
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) {
-                showStatus("Please enter a valid email address.", "error");
-                if (submitBtn instanceof HTMLButtonElement)
-                    submitBtn.disabled = false;
-                return;
-            }
-
-            try {
-                const response = await fetch(
-                    "https://formspree.io/f/xwvnbrod",
-                    {
-                        method: "POST",
-                        body: formData,
-                        headers: {
-                            Accept: "application/json",
-                        },
-                    },
-                );
-
-                if (response.ok) {
-                    showStatus("Thanks! Message sent successfully", "success");
-                    (contactForm as HTMLFormElement).reset();
-                } else {
-                    const data = await response.json();
-                    const errMsg = data.errors
-                        ? data.errors.map((e: any) => e.message).join(", ")
-                        : "Error submitting form";
-                    showStatus(errMsg, "error");
-                    throw new Error();
-                }
-            } catch (err) {
-                showStatus("Oops! Problem sending message.", "error");
-            } finally {
-                if (submitBtn instanceof HTMLButtonElement) {
-                    submitBtn.disabled = false;
-                }
-                setTimeout(hideStatus, 5000);
-            }
-        });
-    }
-</script>

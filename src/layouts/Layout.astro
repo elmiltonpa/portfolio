@@ -1,7 +1,13 @@
 ---
 import Header from "../sections/Header.astro";
 import Footer from "../sections/Footer.astro";
-import { ClientRouter } from "astro:transitions";
+import "../styles/global.css";
+
+interface Props {
+    title?: string;
+}
+
+const { title = "Milton Ibarra | Software Structure Defined" } = Astro.props;
 ---
 
 <!doctype html>
@@ -11,27 +17,119 @@ import { ClientRouter } from "astro:transitions";
         <meta name="viewport" content="width=device-width" />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <meta name="generator" content={Astro.generator} />
-        <title>Milton Ibarra</title>
-        <meta name="description" content="Portfolio of Milton Ibarra, systems engineering student specializing in backend development, full-stack applications, and efficient software solutions." />
+        <title>{title}</title>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..900&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Inter:wght@400;700;900&display=swap"
+            rel="stylesheet"
+        />
+
         <script is:inline>
-            const theme = localStorage.getItem("theme") || "gold";
-            document.documentElement.setAttribute("data-theme", theme);
+            // Theme script to avoid FOUC
+            const theme = (() => {
+                if (
+                    typeof localStorage !== "undefined" &&
+                    localStorage.getItem("theme")
+                ) {
+                    return localStorage.getItem("theme");
+                }
+                if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+                    return "dark";
+                }
+                return "light";
+            })();
+
+            if (theme === "light") {
+                document.documentElement.setAttribute("data-theme", "light");
+            } else {
+                document.documentElement.setAttribute("data-theme", "dark");
+            }
         </script>
-        <ClientRouter />
     </head>
-    <body id="top" class="min-h-screen flex flex-col">
+    <body class="bg-background text-foreground font-body antialiased selection:bg-accent selection:text-white">
         <Header />
-        <main>
+
+        <!-- Side Vertical Index (The "Anchor") -->
+        <aside
+            id="side-index"
+            class="fixed left-0 top-1/2 -translate-y-1/2 hidden lg:flex flex-col gap-12 pl-12 z-40 bg-transparent transition-opacity duration-500"
+        >
+            <div class="flex flex-col gap-2 mb-8">
+                <span
+                    class="font-headline text-xs font-bold uppercase tracking-widest text-primary/40"
+                    >INDEX</span
+                >
+                <span
+                    class="font-headline text-[10px] font-medium text-primary/30"
+                    >PORTFOLIO v.24</span
+                >
+            </div>
+            <div class="flex flex-col gap-12">
+                <a href="#hero" class="group cursor-pointer">
+                    <span
+                        class="font-headline text-6xl font-black text-primary/20 hover:text-primary transition-all duration-300"
+                        >0</span
+                    >
+                </a>
+                <a href="#projects" class="group cursor-pointer">
+                    <span
+                        class="font-headline text-6xl font-black text-primary/20 hover:text-primary transition-all duration-300"
+                        >1</span
+                    >
+                </a>
+                <a href="#skills" class="group cursor-pointer">
+                    <span
+                        class="font-headline text-6xl font-black text-primary/20 hover:text-primary transition-all duration-300"
+                        >2</span
+                    >
+                </a>
+                <a href="#about" class="group cursor-pointer">
+                    <span
+                        class="font-headline text-6xl font-black text-primary/20 hover:text-primary transition-all duration-300"
+                        >3</span
+                    >
+                </a>
+                <a href="#contact" class="group cursor-pointer">
+                    <span
+                        class="font-headline text-6xl font-black text-primary/20 hover:text-primary transition-all duration-300"
+                        >4</span
+                    >
+                </a>
+            </div>
+        </aside>
+
+        <main class="pt-32 pb-24 px-12 lg:pl-48 max-w-screen-2xl mx-auto">
             <slot />
         </main>
-        <Footer />
+
+        <div id="footer-trigger">
+            <Footer />
+        </div>
+
+        <script>
+            const sideIndex = document.getElementById("side-index");
+            const footerTrigger = document.getElementById("footer-trigger");
+
+            if (sideIndex && footerTrigger) {
+                const observer = new IntersectionObserver(
+                    (entries) => {
+                        entries.forEach((entry) => {
+                            if (entry.isIntersecting) {
+                                sideIndex.style.opacity = "0";
+                                sideIndex.style.pointerEvents = "none";
+                            } else {
+                                sideIndex.style.opacity = "1";
+                                sideIndex.style.pointerEvents = "auto";
+                            }
+                        });
+                    },
+                    { threshold: 0.1 }
+                );
+
+                observer.observe(footerTrigger);
+            }
+        </script>
     </body>
 </html>
-
-<style>
-    html,
-    body {
-        width: 100%;
-        min-height: 100%;
-    }
-</style>

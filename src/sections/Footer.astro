@@ -1,107 +1,56 @@
 ---
-import { Icon } from "astro-icon/components";
 
-const currentYear = new Date().getFullYear();
-
-const navItems = [
-    { name: "Home", href: "/" },
-    { name: "About me", href: "#about" },
-    { name: "Skills", href: "#skills" },
-    { name: "Projects", href: "#projects" },
-    { name: "Contact", href: "#contact" },
-];
-
-const socials = [
-    {
-        icon: "lucide:github",
-        href: "https://github.com/elmiltonpa",
-        label: "GitHub",
-    },
-    {
-        icon: "lucide:linkedin",
-        href: "https://www.linkedin.com/in/milton-ibarra-ba1020205/",
-        label: "LinkedIn",
-    },
-];
 ---
 
-<footer class="border-t border-border bg-background">
-    <div class="max-w-5xl mx-auto px-6 py-12">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-12 items-start">
-            <div class="space-y-4">
-                <a
-                    href="/"
-                    class="font-mono text-xl font-bold hover:opacity-80 transition-opacity"
-                >
-                    <span class="text-primary">&#123;</span>
-                    <span class="text-foreground mx-1">m.i</span>
-                    <span class="text-primary">&#125;</span>
-                </a>
-                <p
-                    class="text-muted-foreground text-sm leading-relaxed max-w-xs"
-                >
-                    Building reliable backend systems with a focus on clean code and software engineering principles.
-                </p>
-            </div>
-            <div>
-                <h3
-                    class="font-mono text-sm font-bold text-foreground mb-6 uppercase tracking-wider"
-                >
-                    Navigation
-                </h3>
-                <ul class="space-y-3">
-                    {
-                        navItems.map((item) => (
-                            <li>
-                                <a
-                                    href={item.href}
-                                    class="text-muted-foreground hover:text-primary transition-colors text-sm font-mono link-underline"
-                                >
-                                    {item.name}
-                                </a>
-                            </li>
-                        ))
-                    }
-                </ul>
-            </div>
-
-            <div>
-                <h3
-                    class="font-mono text-sm font-bold text-foreground mb-6 uppercase tracking-wider"
-                >
-                    Social
-                </h3>
-                <div class="flex gap-4">
-                    {
-                        socials.map((social) => (
-                            <a
-                                href={social.href}
-                                class="p-3 rounded-lg bg-secondary border border-border text-muted-foreground hover:text-primary hover:border-primary/50 transition-all duration-300"
-                                aria-label={social.label}
-                            >
-                                <Icon name={social.icon} class="size-5" />
-                            </a>
-                        ))
-                    }
-                </div>
-            </div>
-        </div>
-
-        <div
-            class="mt-16 pt-8 border-t border-border/50 flex flex-col md:flex-row justify-between items-center gap-6"
-        >
-            <p class="text-muted-foreground text-xs font-mono">
-                &copy; {currentYear} Milton Ibarra. All rights reserved.
-            </p>
-
-            <div
-                class="flex items-center gap-2 text-muted-foreground text-xs font-mono"
-            >
-                <span>Made with</span>
-                <Icon name="lucide:heart" class="size-3 text-primary" />
-                <span>using</span>
-                <span class="text-foreground">Astro</span>
-            </div>
-        </div>
+<footer
+  class="bg-primary text-background w-full pt-24 pb-12 px-12 flex flex-col gap-16"
+>
+  <div class="flex flex-col md:flex-row justify-between items-start gap-12">
+    <div class="max-w-xl">
+      <h2
+        class="font-headline text-[10vw] leading-[0.8] uppercase font-black text-background"
+      >
+        LET'S <br />
+        <span class="text-accent italic">BUILD</span>
+        <br />
+        IT.
+      </h2>
     </div>
+    <div class="flex flex-col gap-8 items-start md:items-end w-full md:w-auto">
+      <div
+        class="flex flex-col gap-4 font-headline text-xl font-bold text-background items-start md:items-end"
+      >
+        <a
+          class="hover:text-accent transition-colors duration-150"
+          href="https://github.com/elmiltonpa"
+          target="_blank"
+          rel="noopener noreferrer">GITHUB</a
+        >
+        <a
+          class="hover:text-accent transition-colors duration-150"
+          href="https://www.linkedin.com/in/milton-ibarra-ba1020205/"
+          target="_blank"
+          rel="noopener noreferrer">LINKEDIN</a
+        >
+        <a
+          class="underline decoration-accent decoration-8 hover:text-accent transition-colors duration-150"
+          href="mailto:elmiltonibarra@gmail.com">EMAIL</a
+        >
+      </div>
+    </div>
+  </div>
+  <div
+    class="flex flex-col md:flex-row justify-between items-end border-t border-background/10 pt-12 gap-8"
+  >
+    <div
+      class="text-background font-black font-headline text-3xl tracking-tighter"
+    >
+      MILTON<span class="text-accent">.</span>IBARRA
+    </div>
+    <div
+      class="font-headline text-[10px] uppercase font-bold tracking-[0.3em] text-background/40"
+    >
+      ©{new Date().getFullYear()} MILTON IBARRA. ALL RIGHTS RESERVED.
+    </div>
+  </div>
 </footer>

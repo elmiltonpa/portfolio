@@ -6,5 +6,5 @@ tags: ["Next.js", "React", "Prisma", "PostgreSQL", "Tailwind CSS"]
 link: "https://nextspot.vercel.app"
 github: "https://github.com/elmiltonpa/NextSpot"
 featured: true
-order: 2
+order: 1
 ---

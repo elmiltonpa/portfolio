@@ -1,185 +1,44 @@
 ---
 import ThemeToggle from "../components/ui/ThemeToggle.astro";
-
-const navItems = [
-    { name: "About me", href: "#about" },
-    { name: "Skills", href: "#skills" },
-    { name: "Projects", href: "#projects" },
-    { name: "Contact", href: "#contact" },
-];
 ---
 
-<header
-    id="main-header"
-    class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-background"
+<nav
+    class="fixed top-0 left-0 w-full z-50 bg-background border-b-0"
 >
-    <div class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
-        <a
-            href="/"
-            class="font-mono text-lg font-bold hover:opacity-80 transition-opacity"
+    <div
+        class="flex justify-between items-center w-full px-12 py-8 max-w-screen-2xl mx-auto"
+    >
+        <div
+            class="text-2xl font-black tracking-tighter text-primary font-headline uppercase"
         >
-            <span class="text-primary">&#123;</span>
-            <span class="text-foreground mx-1">m.i</span>
-            <span class="text-primary">&#125;</span>
-        </a>
-
-        <nav class="hidden md:block" aria-label="Main Navigation">
-            <ul class="flex items-center gap-8">
-                {
-                    navItems.map(({ href, name }) => (
-                        <li>
-                            <a
-                                href={href}
-                                class="font-mono text-sm text-muted-foreground hover:text-primary transition-colors"
-                            >
-                                {name}
-                            </a>
-                        </li>
-                    ))
-                }
-            </ul>
-        </nav>
-
-        <div class="flex items-center gap-4">
-            <ThemeToggle />
-
-            <button
-                id="menu-toggle"
-                class="md:hidden text-foreground p-2"
-                aria-expanded="false"
-                aria-controls="mobile-menu"
-                aria-label="Open menu"
+            <a href="/">MILTON<span class="text-accent">.</span>IBARRA</a>
+        </div>
+        <div class="hidden md:flex gap-12">
+            <a
+                class="font-headline uppercase tracking-tighter font-bold text-primary hover:text-accent transition-colors"
+                href="#projects">PROJECTS</a
             >
-                <svg
-                    id="icon-menu"
-                    class="h-6 w-6"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    ><line x1="4" x2="20" y1="12" y2="12"></line><line
-                        x1="4"
-                        x2="20"
-                        y1="6"
-                        y2="6"></line><line x1="4" x2="20" y1="18" y2="18"
-                    ></line></svg
-                >
-                <svg
-                    id="icon-close"
-                    class="hidden h-6 w-6"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    ><path d="M18 6 6 18"></path><path d="m6 6 12 12"
-                    ></path></svg
-                >
-            </button>
+            <a
+                class="font-headline uppercase tracking-tighter font-bold text-primary hover:text-accent transition-colors"
+                href="#skills">SKILLS</a
+            >
+            <a
+                class="font-headline uppercase tracking-tighter font-bold text-primary hover:text-accent transition-colors"
+                href="#about">ABOUT</a
+            >
+            <a
+                class="font-headline uppercase tracking-tighter font-bold text-primary hover:text-accent transition-colors"
+                href="#contact">CONTACT</a
+            >
+        </div>
+        <div class="flex items-center gap-6">
+            <ThemeToggle />
+            <a
+                href="#contact"
+                class="font-headline uppercase tracking-tighter font-bold px-6 py-2 bg-primary text-background hover:bg-accent transition-all"
+            >
+                GET IN TOUCH
+            </a>
         </div>
     </div>
-
-    <nav
-        id="mobile-menu"
-        class="hidden md:hidden bg-background/95 backdrop-blur-lg border-b border-border absolute w-full left-0"
-    >
-        <ul class="flex flex-col items-center py-8 gap-6">
-            {
-                navItems.map(({ href, name }) => (
-                    <li>
-                        <a
-                            href={href}
-                            class="mobile-link font-mono text-lg text-muted-foreground hover:text-primary transition-colors"
-                        >
-                            {name}
-                        </a>
-                    </li>
-                ))
-            }
-        </ul>
-    </nav>
-</header>
-
-<style>
-    header {
-        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    header::after {
-        content: "";
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 1px;
-        background: linear-gradient(
-            90deg,
-            transparent,
-            rgba(var(--primary-rgb), 0.1) 20%,
-            rgba(var(--primary-rgb), 0.8) 50%,
-            rgba(var(--primary-rgb), 0.1) 80%,
-            transparent
-        );
-        background-size: 200% 100%;
-        animation: light-travel 5s linear infinite;
-    }
-
-    .header-scrolled {
-        background-color: color-mix(
-            in srgb,
-            var(--background) 80%,
-            transparent
-        ) !important;
-        backdrop-filter: blur(16px) saturate(180%);
-        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
-    }
-
-    @keyframes light-travel {
-        0% {
-            background-position: 200% 0;
-        }
-        100% {
-            background-position: -200% 0;
-        }
-    }
-</style>
-
-<script>
-    document.addEventListener("astro:page-load", () => {
-        const header = document.querySelector("#main-header");
-        const menuToggle = document.querySelector("#menu-toggle");
-        const mobileMenu = document.querySelector("#mobile-menu");
-        const icons = {
-            menu: document.querySelector("#icon-menu"),
-            close: document.querySelector("#icon-close"),
-        };
-        const mobileLinks = document.querySelectorAll(".mobile-link");
-
-        const handleScroll = () => {
-            const isScrolled = window.scrollY > 20;
-            header?.classList.toggle("header-scrolled", isScrolled);
-            header?.classList.toggle("py-1", isScrolled);
-            header?.classList.toggle("py-0", !isScrolled);
-        };
-
-        const toggleMenu = () => {
-            const isHidden = mobileMenu?.classList.toggle("hidden");
-
-            icons.menu?.classList.toggle("hidden", !isHidden);
-            icons.close?.classList.toggle("hidden", isHidden);
-            menuToggle?.setAttribute("aria-expanded", String(!isHidden));
-        };
-
-        window.addEventListener("scroll", handleScroll, { passive: true });
-        handleScroll();
-        menuToggle?.addEventListener("click", toggleMenu);
-        mobileLinks.forEach((link) =>
-            link.addEventListener("click", toggleMenu),
-        );
-    });
-</script>
+</nav>
