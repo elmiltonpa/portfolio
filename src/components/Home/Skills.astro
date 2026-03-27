@@ -21,7 +21,7 @@ const skills = [
 <section id="skills" class="grid grid-cols-1 md:grid-cols-12 gap-8 sm:gap-12 md:gap-16 mb-40 sm:mb-60 md:mb-80">
     <div class="md:col-span-3">
         <h2
-            class="font-headline text-xl sm:text-2xl font-black uppercase tracking-tighter sticky top-40"
+            class="font-headline text-xl sm:text-2xl font-black uppercase tracking-tighter sticky top-40 scroll-animate-right"
         >
             02
             <span class="block text-accent"
@@ -31,8 +31,8 @@ const skills = [
     </div>
     <div class="md:col-span-9">
         <div class="space-y-16 sm:space-y-24 md:space-y-32">
-            {skills.map(skill => (
-                <div class="group relative">
+            {skills.map((skill, idx) => (
+                <div class="group relative scroll-animate">
                     <h3
                         class="font-headline text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-8xl font-black uppercase tracking-tighter leading-[0.95] sm:leading-none inline-block pr-2 md:pr-8 transition-transform duration-300 will-change-transform group-hover:translate-x-2 lg:group-hover:translate-x-8 break-words hyphens-auto"
                     >
@@ -61,11 +61,11 @@ const skills = [
             ))}
         </div>
 
-        <div class="mt-16 sm:mt-24 md:mt-40 border-t-2 border-primary pt-8 sm:pt-12 md:pt-16">
+        <div class="mt-16 sm:mt-24 md:mt-40 border-t-2 border-primary pt-8 sm:pt-12 md:pt-16 scroll-animate">
             <h4 class="font-label text-[10px] sm:text-xs font-black uppercase tracking-[0.2em] mb-6 sm:mb-8 md:mb-12 text-primary/40">Core Tech Stack</h4>
             <div class="flex flex-wrap gap-1.5 sm:gap-2 md:gap-4">
-                {["TypeScript", "React", "Next.js", "Astro", "Node.js", "Rust", "PostgreSQL", "Redis", "Docker", "Git"].map(tech => (
-                    <span class="font-headline text-base sm:text-xl md:text-3xl lg:text-4xl xl:text-5xl font-black uppercase tracking-tighter border-2 border-primary/10 px-2 sm:px-3 md:px-4 lg:px-6 py-1.5 sm:py-2 md:py-3 lg:py-4 hover:bg-accent hover:text-white hover:border-accent transition-all duration-300 cursor-default">
+                {["TypeScript", "React", "Next.js", "Astro", "Node.js", "Rust", "PostgreSQL", "Redis", "Docker", "Git"].map((tech, idx) => (
+                    <span class="font-headline text-base sm:text-xl md:text-3xl lg:text-4xl xl:text-5xl font-black uppercase tracking-tighter border-2 border-primary/10 px-2 sm:px-3 md:px-4 lg:px-6 py-1.5 sm:py-2 md:py-3 lg:py-4 hover:bg-accent hover:text-white hover:border-accent transition-all duration-300 cursor-default animate-scale-in" style={`animation-delay: ${idx * 80}ms`}>
                         {tech}
                     </span>
                 ))}

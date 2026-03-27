@@ -8,7 +8,7 @@ const sortedProjects = projects.sort((a, b) => (a.data.order || 0) - (b.data.ord
 <section id="projects" class="flex flex-col md:grid md:grid-cols-12 gap-8 md:gap-16 mb-24 sm:mb-40 md:mb-80">
     <div class="md:col-span-3">
         <h2
-            class="font-headline text-xl sm:text-2xl font-black uppercase tracking-tighter sticky top-40"
+            class="font-headline text-xl sm:text-2xl font-black uppercase tracking-tighter sticky top-40 scroll-animate-right"
         >
             01
             <span class="block text-accent">Projects</span>
@@ -16,27 +16,28 @@ const sortedProjects = projects.sort((a, b) => (a.data.order || 0) - (b.data.ord
     </div>
     
     <div class="md:col-span-9">
-        <div class="border-t-2 border-primary">
+        <div class="border-t-2 border-primary scroll-animate">
             {sortedProjects.map((project, index) => (
                 <a 
                     href={project.data.github || "#"} 
                     target="_blank" 
-                    class="group block border-b border-primary/20 py-6 sm:py-8 hover:bg-accent hover:text-white transition-all duration-300 px-3 sm:px-4 -mx-3 sm:-mx-4"
+                    class="group relative block border-b border-primary/20 py-6 sm:py-8 overflow-hidden px-3 sm:px-4 -mx-3 sm:-mx-4"
                 >
-                    <div class="flex flex-col md:grid md:grid-cols-12 gap-3 sm:gap-4 md:gap-8 items-start md:items-center">
+                    <div class="absolute inset-0 bg-accent transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-out z-0"></div>
+                    <div class="relative z-10 flex flex-col md:grid md:grid-cols-12 gap-3 sm:gap-4 md:gap-8 items-start md:items-center transition-colors duration-300">
                         <div class="md:col-span-5">
-                            <h3 class="font-headline text-2xl sm:text-3xl md:text-4xl font-black uppercase tracking-tighter leading-none break-words">
+                            <h3 class="font-headline text-2xl sm:text-3xl md:text-4xl font-black uppercase tracking-tighter leading-none break-words group-hover:text-white transition-colors duration-300">
                                 {project.data.title}
                             </h3>
                         </div>
                         
                         <div class="md:col-span-6 flex flex-col gap-2 sm:gap-3">
-                            <p class="font-label text-[10px] uppercase tracking-[0.1em] font-bold opacity-60 group-hover:opacity-100 transition-opacity line-clamp-2 sm:truncate">
+                            <p class="font-label text-[10px] uppercase tracking-[0.1em] font-bold opacity-60 group-hover:opacity-100 transition-opacity line-clamp-2 sm:truncate group-hover:text-white/80 transition-colors duration-300">
                                 {project.data.description}
                             </p>
                             <div class="flex flex-wrap gap-x-3 sm:gap-x-4 gap-y-1">
                                 {project.data.tags?.map(tag => (
-                                    <span class="font-label text-[8px] sm:text-[9px] font-black uppercase tracking-widest text-primary/40 group-hover:text-white/60 transition-colors">
+                                    <span class="font-label text-[8px] sm:text-[9px] font-black uppercase tracking-widest text-primary/40 group-hover:text-white/60 transition-colors duration-300">
                                         [{tag}]
                                     </span>
                                 ))}
@@ -44,7 +45,7 @@ const sortedProjects = projects.sort((a, b) => (a.data.order || 0) - (b.data.ord
                         </div>
                         
                         <div class="md:col-span-1 flex justify-end absolute right-3 top-1/2 -translate-y-1/2 md:relative md:right-auto md:top-auto md:translate-y-0">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" class="transition-transform group-hover:translate-x-2 w-4 h-4 sm:w-5 sm:h-5">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" class="transition-transform group-hover:translate-x-2 w-4 h-4 sm:w-5 sm:h-5 group-hover:text-white transition-colors duration-300">
                                 <line x1="5" y1="12" x2="19" y2="12"></line>
                                 <polyline points="12 5 19 12 12 19"></polyline>
                             </svg>
@@ -54,7 +55,7 @@ const sortedProjects = projects.sort((a, b) => (a.data.order || 0) - (b.data.ord
             ))}
         </div>
         
-        <div class="mt-12 sm:mt-16 flex flex-col items-center gap-4 sm:gap-6">
+        <div class="mt-12 sm:mt-16 flex flex-col items-center gap-4 sm:gap-6 scroll-animate">
             <a 
                 href="https://github.com/miltonibarra" 
                 target="_blank" 
