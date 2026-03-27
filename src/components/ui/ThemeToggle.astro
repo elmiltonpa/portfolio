@@ -1,98 +1,94 @@
 <button
-    id="theme-toggle"
-    class="relative p-2 w-10 h-10 border border-primary hover:bg-primary group transition-all duration-300 cursor-pointer"
-    aria-label="Toggle theme"
-    type="button"
+  id="theme-toggle"
+  class="relative p-2 w-10 h-10 border border-primary hover:bg-primary group transition-all duration-300 cursor-pointer"
+  aria-label="Toggle theme"
+  type="button"
 >
-    <!-- Sun icon (shown in dark mode to switch to light) -->
-    <div
-        id="sun-icon"
-        class="absolute inset-0 flex items-center justify-center text-primary group-hover:text-background transition-all duration-300"
+  <div
+    id="sun-icon"
+    class="absolute inset-0 flex items-center justify-center text-primary group-hover:text-background transition-all duration-300"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
     >
-        <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-        >
-            <circle cx="12" cy="12" r="4"></circle>
-            <path d="M12 2v2"></path>
-            <path d="M12 20v2"></path>
-            <path d="m4.93 4.93 1.41 1.41"></path>
-            <path d="m17.66 17.66 1.41 1.41"></path>
-            <path d="M2 12h2"></path>
-            <path d="M20 12h2"></path>
-            <path d="m6.34 17.66-1.41 1.41"></path>
-            <path d="m19.07 4.93-1.41 1.41"></path>
-        </svg>
-    </div>
-    <!-- Moon icon (shown in light mode to switch to dark) -->
-    <div
-        id="moon-icon"
-        class="absolute inset-0 flex items-center justify-center text-primary group-hover:text-background transition-all duration-300"
+      <circle cx="12" cy="12" r="4"></circle>
+      <path d="M12 2v2"></path>
+      <path d="M12 20v2"></path>
+      <path d="m4.93 4.93 1.41 1.41"></path>
+      <path d="m17.66 17.66 1.41 1.41"></path>
+      <path d="M2 12h2"></path>
+      <path d="M20 12h2"></path>
+      <path d="m6.34 17.66-1.41 1.41"></path>
+      <path d="m19.07 4.93-1.41 1.41"></path>
+    </svg>
+  </div>
+  <div
+    id="moon-icon"
+    class="absolute inset-0 flex items-center justify-center text-primary group-hover:text-background transition-all duration-300"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
     >
-        <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-        >
-            <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
-        </svg>
-    </div>
+      <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+    </svg>
+  </div>
 </button>
 
 <style>
-    /* Initial state based on data-theme - no JS needed for first paint */
-    :root[data-theme="dark"] #sun-icon {
-        opacity: 1;
-        transform: scale(1);
-    }
-    :root[data-theme="dark"] #moon-icon {
-        opacity: 0;
-        transform: scale(0);
-    }
-    :root[data-theme="light"] #sun-icon {
-        opacity: 0;
-        transform: scale(0);
-    }
-    :root[data-theme="light"] #moon-icon {
-        opacity: 1;
-        transform: scale(1);
-    }
-    /* Default state (before JS sets theme) - assume dark */
-    :root:not([data-theme]) #sun-icon {
-        opacity: 1;
-        transform: scale(1);
-    }
-    :root:not([data-theme]) #moon-icon {
-        opacity: 0;
-        transform: scale(0);
-    }
+  :root[data-theme="dark"] #sun-icon {
+    opacity: 1;
+    transform: scale(1);
+  }
+  :root[data-theme="dark"] #moon-icon {
+    opacity: 0;
+    transform: scale(0);
+  }
+  :root[data-theme="light"] #sun-icon {
+    opacity: 0;
+    transform: scale(0);
+  }
+  :root[data-theme="light"] #moon-icon {
+    opacity: 1;
+    transform: scale(1);
+  }
+  :root:not([data-theme]) #sun-icon {
+    opacity: 1;
+    transform: scale(1);
+  }
+  :root:not([data-theme]) #moon-icon {
+    opacity: 0;
+    transform: scale(0);
+  }
 </style>
 
 <script is:inline>
-    (function() {
-        const themeToggle = document.getElementById("theme-toggle");
-        if (!themeToggle) return;
-        
-        themeToggle.addEventListener("click", function() {
-            const element = document.documentElement;
-            const currentTheme = element.getAttribute("data-theme");
-            const newTheme = currentTheme === "dark" ? "light" : "dark";
+  (function () {
+    const themeToggle = document.getElementById("theme-toggle");
+    if (!themeToggle) return;
 
-            element.setAttribute("data-theme", newTheme);
-            localStorage.setItem("theme", newTheme);
-        });
-    })();
+    themeToggle.addEventListener("click", function () {
+      const element = document.documentElement;
+      const currentTheme = element.getAttribute("data-theme");
+      const newTheme = currentTheme === "dark" ? "light" : "dark";
+
+      element.setAttribute("data-theme", newTheme);
+      localStorage.setItem("theme", newTheme);
+    });
+  })();
 </script>

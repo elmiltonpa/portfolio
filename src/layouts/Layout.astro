@@ -27,7 +27,6 @@ const { title = "Milton Ibarra | Software Structure Defined" } = Astro.props;
     />
 
     <script is:inline>
-      // Theme script to avoid FOUC
       const theme = (() => {
         if (
           typeof localStorage !== "undefined" &&
@@ -53,7 +52,6 @@ const { title = "Milton Ibarra | Software Structure Defined" } = Astro.props;
   >
     <Header />
 
-    <!-- Side Vertical Index (The "Anchor") -->
     <aside
       id="side-index"
       class="fixed left-0 top-1/2 -translate-y-1/2 hidden lg:flex flex-col gap-12 pl-12 z-40 bg-transparent transition-opacity duration-500"
