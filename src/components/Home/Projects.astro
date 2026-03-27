@@ -24,198 +24,213 @@ const sortedProjects = projects.sort(
   <div class="md:col-span-9">
     <div class="border-t-2 border-primary scroll-animate">
       {
-        sortedProjects.map((project, index) => (
-          <div
-            class="project-item group border-b border-primary/20 overflow-hidden"
-            data-project-index={index}
-          >
-            <button
-              type="button"
-              class="project-toggle w-full text-left relative py-6 sm:py-8 px-3 sm:px-4 cursor-pointer"
-              aria-expanded="false"
+        sortedProjects.map((project, index) => {
+          const contentId = `project-content-${index}`;
+          const triggerId = `project-trigger-${index}`;
+
+          return (
+            <div
+              class="project-item group border-b border-primary/20 overflow-hidden"
+              data-project-index={index}
             >
-              <div class="absolute inset-0 bg-accent transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-out z-0" />
-              <div class="relative z-10 flex flex-col md:grid md:grid-cols-12 gap-3 sm:gap-4 md:gap-8 items-start md:items-center transition-colors duration-300">
-                <div class="md:col-span-5">
-                  <h3 class="font-headline text-2xl sm:text-3xl md:text-4xl font-black uppercase tracking-tighter leading-none break-words group-hover:text-white transition-colors duration-300">
-                    {project.data.title}
-                  </h3>
-                </div>
+              <div class="relative">
+                <div class="absolute inset-0 bg-accent transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-out z-0" />
 
-                <div class="md:col-span-5 flex flex-col gap-2 sm:gap-3">
-                  <p class="font-label text-[10px] uppercase tracking-[0.1em] font-bold opacity-60 group-hover:opacity-100 transition-opacity line-clamp-2 sm:truncate group-hover:text-white/80 transition-colors duration-300">
-                    {project.data.description}
-                  </p>
-                  <div class="flex flex-wrap gap-x-3 sm:gap-x-4 gap-y-1">
-                    {project.data.tags?.map((tag) => (
-                      <span class="font-label text-[8px] sm:text-[9px] font-black uppercase tracking-widest text-primary/40 group-hover:text-white/60 transition-colors duration-300">
-                        [{tag}]
-                      </span>
-                    ))}
-                  </div>
-                </div>
+                <button
+                  id={triggerId}
+                  aria-expanded="false"
+                  aria-controls={contentId}
+                  class="project-trigger absolute inset-0 w-full h-full z-10 cursor-pointer appearance-none border-none bg-transparent focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-white"
+                  aria-label={`Toggle details for ${project.data.title}`}
+                />
 
-                <div class="md:col-span-1 flex gap-2 items-center absolute right-3 top-1/2 -translate-y-1/2 md:relative md:right-auto md:top-auto md:translate-y-0">
-                  {project.data.github && (
-                    <a
-                      href={project.data.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="project-link border border-primary/40 px-2 py-1 font-label text-[8px] font-black uppercase tracking-wider hover:bg-primary hover:text-background transition-all duration-200 group-hover:border-white/40 group-hover:text-white"
-                      onclick="event.stopPropagation()"
-                    >
-                      GH
-                    </a>
-                  )}
-                  {project.data.link && (
-                    <a
-                      href={project.data.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="project-link border border-accent px-2 py-1 font-label text-[8px] font-black uppercase tracking-wider text-accent hover:bg-accent hover:text-white transition-all duration-200 group-hover:border-white group-hover:text-white"
-                      onclick="event.stopPropagation()"
-                    >
-                      DEMO
-                    </a>
-                  )}
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="3"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    class="expand-icon transition-transform duration-300 group-hover:text-white ml-1"
-                  >
-                    <polyline points="6 9 12 15 18 9" />
-                  </svg>
-                </div>
-              </div>
-            </button>
-
-            <div class="project-content max-h-0 overflow-hidden transition-all duration-500 ease-out">
-              <div class="px-3 sm:px-4 pb-8 pt-2 border-t border-primary/10">
-                <div class="flex flex-col md:grid md:grid-cols-12 gap-6 md:gap-8">
+                <div class="relative z-20 pointer-events-none flex flex-col md:grid md:grid-cols-12 gap-3 sm:gap-4 md:gap-8 items-start md:items-center py-6 sm:py-8 px-3 sm:px-4 transition-colors duration-300">
                   <div class="md:col-span-5">
-                    <div class="border-2 border-primary overflow-hidden">
-                      <Image
-                        src={project.data.image}
-                        alt={project.data.title}
-                        class="w-full h-auto object-cover grayscale hover:grayscale-0 transition-all duration-500"
-                        widths={[400, 800]}
-                        sizes="(max-width: 768px) 100vw, 40vw"
-                      />
-                    </div>
+                    <h3 class="font-headline text-2xl sm:text-3xl md:text-4xl font-black uppercase tracking-tighter leading-none break-words group-hover:text-white transition-colors duration-300">
+                      {project.data.title}
+                    </h3>
                   </div>
 
-                  <div class="md:col-span-7 flex flex-col gap-6">
-                    <div>
-                      <span class="font-label text-[9px] font-black uppercase tracking-[0.3em] text-primary/40 block mb-2">
-                        DESCRIPTION
-                      </span>
-                      <p class="font-body text-sm sm:text-base leading-relaxed text-primary/80">
-                        {project.data.description}
-                      </p>
-                    </div>
-
-                    <div class="flex flex-wrap gap-4">
-                      {project.data.github && (
-                        <a
-                          href={project.data.github}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          class="group/link flex items-center gap-2 border-2 border-primary px-4 py-2 hover:bg-primary hover:text-white transition-all duration-200"
-                        >
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="16"
-                            height="16"
-                            viewBox="0 0 24 24"
-                            fill="currentColor"
-                            class="transition-transform group-hover/link:scale-110"
-                          >
-                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-                          </svg>
-                          <span class="font-headline text-xs font-black uppercase tracking-wider">
-                            GitHub
-                          </span>
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="12"
-                            height="12"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="3"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            class="transition-transform group-hover/link:translate-x-1 group-hover/link:-translate-y-1"
-                          >
-                            <line x1="7" y1="17" x2="17" y2="7" />
-                            <polyline points="7 7 17 7 17 17" />
-                          </svg>
-                        </a>
-                      )}
-                      {project.data.link && (
-                        <a
-                          href={project.data.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          class="group/link flex items-center gap-2 border-2 border-accent bg-accent text-white px-4 py-2 hover:bg-transparent hover:text-accent transition-all duration-200"
-                        >
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="16"
-                            height="16"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            class="transition-transform group-hover/link:scale-110"
-                          >
-                            <circle cx="12" cy="12" r="10" />
-                            <polygon points="10 8 16 12 10 16 10 8" />
-                          </svg>
-                          <span class="font-headline text-xs font-black uppercase tracking-wider">
-                            Live Demo
-                          </span>
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="12"
-                            height="12"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="3"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            class="transition-transform group-hover/link:translate-x-1 group-hover/link:-translate-y-1"
-                          >
-                            <line x1="7" y1="17" x2="17" y2="7" />
-                            <polyline points="7 7 17 7 17 17" />
-                          </svg>
-                        </a>
-                      )}
-                    </div>
-
-                    <div class="flex flex-wrap gap-2 pt-2 border-t border-primary/10">
+                  <div class="md:col-span-5 flex flex-col gap-2 sm:gap-3">
+                    <p class="font-label text-[10px] uppercase tracking-[0.1em] font-bold opacity-60 group-hover:opacity-100 transition-opacity line-clamp-2 sm:truncate group-hover:text-white/80 transition-colors duration-300">
+                      {project.data.description}
+                    </p>
+                    <div class="flex flex-wrap gap-x-3 sm:gap-x-4 gap-y-1">
                       {project.data.tags?.map((tag) => (
-                        <span class="font-label text-[9px] font-black uppercase tracking-widest text-primary/50 border border-primary/20 px-2 py-1">
-                          {tag}
+                        <span class="font-label text-[8px] sm:text-[9px] font-black uppercase tracking-widest text-primary/40 group-hover:text-white/60 transition-colors duration-300">
+                          [{tag}]
                         </span>
                       ))}
+                    </div>
+                  </div>
+
+                  <div class="md:col-span-2 flex gap-3 items-center pointer-events-auto absolute right-3 top-1/2 -translate-y-1/2 md:relative md:right-auto md:top-auto md:translate-y-0 justify-end w-full md:w-auto">
+                    {project.data.github && (
+                      <a
+                        href={project.data.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="project-link border border-primary/40 px-2 py-1 font-label text-[8px] font-black uppercase tracking-wider group-hover:border-white/40 group-hover:text-white hover:!bg-primary hover:!text-background transition-all duration-200"
+                        title="View on GitHub"
+                      >
+                        GH
+                      </a>
+                    )}
+                    {project.data.link && (
+                      <a
+                        href={project.data.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="project-link border border-accent px-2 py-1 font-label text-[8px] font-black uppercase tracking-wider text-accent group-hover:border-white group-hover:text-white hover:!bg-accent hover:!text-white transition-all duration-200"
+                        title="View Demo"
+                      >
+                        DEMO
+                      </a>
+                    )}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="3"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="expand-icon transition-transform duration-300 group-hover:text-white ml-1"
+                    >
+                      <polyline points="6 9 12 15 18 9" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                id={contentId}
+                role="region"
+                aria-labelledby={triggerId}
+                class="project-content max-h-0 overflow-hidden transition-all duration-500 ease-out"
+              >
+                <div class="px-3 sm:px-4 pb-8 pt-2 border-t border-primary/10">
+                  <div class="flex flex-col md:grid md:grid-cols-12 gap-6 md:gap-8">
+                    <div class="md:col-span-5">
+                      <div class="border-2 border-primary overflow-hidden">
+                        <Image
+                          src={project.data.image}
+                          alt={project.data.title}
+                          class="w-full h-auto object-cover grayscale hover:grayscale-0 transition-all duration-500"
+                          widths={[400, 800]}
+                          sizes="(max-width: 768px) 100vw, 40vw"
+                        />
+                      </div>
+                    </div>
+
+                    <div class="md:col-span-7 flex flex-col gap-6">
+                      <div>
+                        <span class="font-label text-[9px] font-black uppercase tracking-[0.3em] text-primary/40 block mb-2">
+                          DESCRIPTION
+                        </span>
+                        <p class="font-body text-sm sm:text-base leading-relaxed text-primary/80">
+                          {project.data.description}
+                        </p>
+                      </div>
+
+                      <div class="flex flex-wrap gap-4">
+                        {project.data.github && (
+                          <a
+                            href={project.data.github}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="group/link flex items-center gap-2 border-2 border-primary px-4 py-2 hover:bg-primary hover:text-background transition-all duration-200"
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="16"
+                              height="16"
+                              viewBox="0 0 24 24"
+                              fill="currentColor"
+                              class="transition-transform group-hover/link:scale-110"
+                            >
+                              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                            </svg>
+                            <span class="font-headline text-xs font-black uppercase tracking-wider">
+                              GitHub
+                            </span>
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="12"
+                              height="12"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-width="3"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              class="transition-transform group-hover/link:translate-x-1 group-hover/link:-translate-y-1"
+                            >
+                              <line x1="7" y1="17" x2="17" y2="7" />
+                              <polyline points="7 7 17 7 17 17" />
+                            </svg>
+                          </a>
+                        )}
+                        {project.data.link && (
+                          <a
+                            href={project.data.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="group/link flex items-center gap-2 border-2 border-accent bg-accent text-white px-4 py-2 hover:bg-transparent hover:text-accent transition-all duration-200"
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="16"
+                              height="16"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-width="2"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              class="transition-transform group-hover/link:scale-110"
+                            >
+                              <circle cx="12" cy="12" r="10" />
+                              <polygon points="10 8 16 12 10 16 10 8" />
+                            </svg>
+                            <span class="font-headline text-xs font-black uppercase tracking-wider">
+                              Live Demo
+                            </span>
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="12"
+                              height="12"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-width="3"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              class="transition-transform group-hover/link:translate-x-1 group-hover/link:-translate-y-1"
+                            >
+                              <line x1="7" y1="17" x2="17" y2="7" />
+                              <polyline points="7 7 17 7 17 17" />
+                            </svg>
+                          </a>
+                        )}
+                      </div>
+
+                      <div class="flex flex-wrap gap-2 pt-2 border-t border-primary/10">
+                        {project.data.tags?.map((tag) => (
+                          <span class="font-label text-[9px] font-black uppercase tracking-widest text-primary/50 border border-primary/20 px-2 py-1">
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        ))
+          );
+        })
       }
     </div>
 
@@ -261,48 +276,58 @@ const sortedProjects = projects.sort(
 </section>
 
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
+  function closeItem(
+    trigger: HTMLButtonElement,
+    content: HTMLElement,
+    icon: Element,
+  ): void {
+    trigger.setAttribute("aria-expanded", "false");
+    icon.classList.remove("rotate-180");
+    content.style.maxHeight = "0";
+  }
+
+  function openItem(
+    trigger: HTMLButtonElement,
+    content: HTMLElement,
+    icon: Element,
+  ): void {
+    trigger.setAttribute("aria-expanded", "true");
+    icon.classList.add("rotate-180");
+    content.style.maxHeight = content.scrollHeight + "px";
+  }
+
+  function initAccordion() {
     const projectItems = document.querySelectorAll(".project-item");
 
     projectItems.forEach((item) => {
-      const toggle = item.querySelector(".project-toggle");
-      const content = item.querySelector(".project-content");
+      const trigger = item.querySelector<HTMLButtonElement>(".project-trigger");
+      const content = item.querySelector<HTMLElement>(".project-content");
       const expandIcon = item.querySelector(".expand-icon");
 
-      if (!toggle || !content || !expandIcon) return;
+      if (!trigger || !content || !expandIcon) return;
 
-      toggle.addEventListener("click", (e) => {
-        if ((e.target as HTMLElement).closest(".project-link")) return;
-
-        const isExpanded = toggle.getAttribute("aria-expanded") === "true";
+      trigger.addEventListener("click", () => {
+        const isExpanded = trigger.getAttribute("aria-expanded") === "true";
 
         projectItems.forEach((otherItem) => {
-          if (otherItem !== item) {
-            const otherToggle = otherItem.querySelector(".project-toggle");
-            const otherContent = otherItem.querySelector(
-              ".project-content",
-            ) as HTMLElement;
-            const otherIcon = otherItem.querySelector(".expand-icon");
-
-            if (otherToggle && otherContent && otherIcon) {
-              otherToggle.setAttribute("aria-expanded", "false");
-              otherContent.style.maxHeight = "0";
-              otherIcon.classList.remove("rotate-180");
-            }
+          if (otherItem === item) return;
+          const otherTrigger =
+            otherItem.querySelector<HTMLButtonElement>(".project-trigger");
+          const otherContent =
+            otherItem.querySelector<HTMLElement>(".project-content");
+          const otherIcon = otherItem.querySelector(".expand-icon");
+          if (otherTrigger && otherContent && otherIcon) {
+            closeItem(otherTrigger, otherContent, otherIcon);
           }
         });
 
         if (isExpanded) {
-          toggle.setAttribute("aria-expanded", "false");
-          (content as HTMLElement).style.maxHeight = "0";
-          expandIcon.classList.remove("rotate-180");
+          closeItem(trigger, content, expandIcon);
         } else {
-          toggle.setAttribute("aria-expanded", "true");
-          (content as HTMLElement).style.maxHeight =
-            content.scrollHeight + "px";
-          expandIcon.classList.add("rotate-180");
+          openItem(trigger, content, expandIcon);
         }
       });
     });
-  });
+  }
+  document.addEventListener("DOMContentLoaded", initAccordion);
 </script>
