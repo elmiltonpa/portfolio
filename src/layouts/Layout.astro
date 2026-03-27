@@ -126,20 +126,24 @@ const { title = "Milton Ibarra | Software Structure Defined" } = Astro.props;
       const observerOptions = {
         root: null,
         rootMargin: "0px",
-        threshold: 0.1
+        threshold: 0.1,
       };
 
       const scrollObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
+        entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add("visible");
           }
         });
       }, observerOptions);
 
-      document.querySelectorAll(".scroll-animate, .scroll-animate-left, .scroll-animate-right").forEach(el => {
-        scrollObserver.observe(el);
-      });
+      document
+        .querySelectorAll(
+          ".scroll-animate, .scroll-animate-left, .scroll-animate-right",
+        )
+        .forEach((el) => {
+          scrollObserver.observe(el);
+        });
     </script>
   </body>
 </html>
